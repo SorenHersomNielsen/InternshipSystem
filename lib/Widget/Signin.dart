@@ -3,13 +3,13 @@ import 'package:internship/HomePage.dart';
 import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
 
-class signin extends StatefulWidget {
+class SignIn extends StatefulWidget {
   @override
-  _signinState createState() => _signinState();
+  _SignInState createState() => _SignInState();
 }
 
-class _signinState extends State<signin> {
-  final _formkey = GlobalKey<FormState>();
+class _SignInState extends State<SignIn> {
+  final _formKey = GlobalKey<FormState>();
   dynamic _email;
   dynamic _password;
   bool check = false;
@@ -22,14 +22,14 @@ class _signinState extends State<signin> {
       backgroundColor: Colors.black,
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           height: 300,
           width: 550,
           color: Colors.white,
           child: Form(
-            key: _formkey,
+            key: _formKey,
             child: Column(children: <Widget>[
-               Text(
+               const Text(
                 'Log på',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -37,7 +37,7 @@ class _signinState extends State<signin> {
                     color: Colors.red
                 ),
               ),
-               SizedBox(height: 20),
+               const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Email'),
@@ -51,7 +51,7 @@ class _signinState extends State<signin> {
                   return null;
                 },
               ),
-               SizedBox(height: 20),
+               const SizedBox(height: 20),
               TextFormField(
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -65,11 +65,11 @@ class _signinState extends State<signin> {
                     }
                     return null;
                   }),
-               SizedBox(height: 10),
+               const SizedBox(height: 10),
             SizedBox(
               child: TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.red),
-                child:  Text(
+                child:  const Text(
                   'Log på',
                  style: TextStyle(
                    color: Colors.white,
@@ -86,7 +86,6 @@ class _signinState extends State<signin> {
                   ),
                     }
                       else{
-                      print('ingen adgang')
                       }
                   });
 

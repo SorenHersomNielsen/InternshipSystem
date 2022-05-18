@@ -6,7 +6,6 @@ import 'dart:convert';
 class NetworkMethod{
 
   static Future<Person?> fetchPerson(email, password) async {
-    print('network');
 
     final response = await http
         .get(Uri.parse('http://localhost:5000/api/Persons/OnePerson?mail=$email&ord=$password'));

@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(body:Padding(padding: const EdgeInsets.all(20), child: signin())),
+      home: Scaffold(body:Padding(padding: const EdgeInsets.all(20), child: SignIn())),
     );
   }
 }
