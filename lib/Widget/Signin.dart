@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:internship/HomePage.dart';
+import 'package:internship/ProfilePage.dart';
 import 'package:internship/NetworkMethod.dart';
-import 'package:internship/Model/Person.dart';
 
 class SignIn extends StatefulWidget {
+
   @override
   _SignInState createState() => _SignInState();
 }
@@ -14,7 +14,10 @@ class _SignInState extends State<SignIn> {
   dynamic _password;
   bool check = false;
 
-
+  final snackballfall = const SnackBar(
+    content: Text('noget gik galt, prøve igen :('),
+    backgroundColor: Colors.red,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class _SignInState extends State<SignIn> {
       body: Center(
         child: Container(
           padding: const EdgeInsets.all(20),
-          height: 300,
+          height: 315,
           width: 550,
           color: Colors.white,
           child: Form(
@@ -46,7 +49,7 @@ class _SignInState extends State<SignIn> {
                 },
                 validator: (value){
                   if(value!.isEmpty){
-                    return 'mangle email';
+                    return 'være venlig at skrive dit mail';
                   }
                   return null;
                 },
@@ -61,7 +64,7 @@ class _SignInState extends State<SignIn> {
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter your password';
+                      return 'være venlig at skrive dit password';
                     }
                     return null;
                   }),
@@ -76,20 +79,21 @@ class _SignInState extends State<SignIn> {
                  ),
                 ),
                 onPressed: () {
-                  //bool check = false;
-                  NetworkMethod.fetchPerson(_email,_password).then((value) => {
+                  if (_formKey.currentState!.validate()) {
+                    NetworkMethod.fetchPerson(_email,_password).then((value) => {
 
-                    if(value != null) {
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  HomePage()),
-                  ),
-                    }
-                      else{
+                      if(value != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  const ProfilePage()),
+                        ),
                       }
-                  });
-
-                },
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(snackballfall)
+                      }
+                    });
+                  };
+                  },
               ),
             )
             ]),
