@@ -10,8 +10,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
-  dynamic _email;
-  dynamic _password;
+  late String _email;
+  late String _password;
   bool check = false;
 
   final snackballfall = const SnackBar(
@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                       if(value != null) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  const ProfilePage()),
+                          MaterialPageRoute(builder: (context) =>   ProfilePage(email: _email, password: _password,)),
                         ),
                       }
                       else{

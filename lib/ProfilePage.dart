@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:internship/Widget/Profile.dart';
+import 'package:internship/ActivtiesPage.dart';
 
 class ProfilePage extends StatefulWidget{
-  const ProfilePage({Key? key}) : super(key: key);
 
+  final String email;
+  final String password;
 
+   ProfilePage({Key? key, required this.email, required this.password }) : super(key: key);
 
 @override
 _ProfilePageState createState() => _ProfilePageState();
@@ -44,14 +48,23 @@ class _ProfilePageState extends State<ProfilePage>{
                 },
               ),
               ListTile(
-                title: const Text('Item 2'),
+                title: const Text(
+                    'Aktiviteter',
+                  style: TextStyle(
+                    color: Colors.black
+                  ),
+                ),
                 onTap: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ActivtesPage()),
+                  );
                 },
               ),
             ],
           ),
         ),
+      body: Profile(email: widget.email,password: widget.password)
     );
   }
 
