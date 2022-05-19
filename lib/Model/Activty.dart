@@ -1,7 +1,7 @@
 class Activity {
   final int Id;
   final String Headline;
-  final DateTime Date;
+  final String Date;
 
   const Activity({
     required this.Id,

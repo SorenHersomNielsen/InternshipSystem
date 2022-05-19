@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/NetworkMethod.dart';
 
+
 class Profile extends StatefulWidget {
 
    Profile({Key? key, required this.password, required this.email}) : super(key: key);
@@ -35,31 +36,46 @@ class _ProfileState extends State<Profile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                        Text(
+                        snapshot.data!.Name,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+                       Text(
+                        snapshot.data!.Mail,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 10.0),
+                       Text(
+                         snapshot.data!.TelephoneNumber,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 10.0),
+                       Text(
+                         snapshot.data!.School,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
+                        snapshot.data!.Internship,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text(
                         snapshot.data!.Role,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-
-                      ),
-                      const SizedBox(height: 10.0),
-                      const Text(
-                        'søren@test.dk',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(height: 10.0),
-                      const Text(
-                        'dk',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(height: 10.0),
-                      const Text(
-                        '112233556556105',
                         style: TextStyle(
                           fontSize: 20.0,
                         ),
@@ -70,8 +86,6 @@ class _ProfileState extends State<Profile> {
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
-              // By default, show a loading spinner.
               return const CircularProgressIndicator();
             },
           ),

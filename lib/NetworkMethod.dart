@@ -33,16 +33,28 @@ class NetworkMethod{
   }
 
 
-  static Future<Activity> getActivityData() async {
+  static Future<List<Activity>> getActivityData(String Role, int Id) async {
 
-    final response = await http
-        .get(Uri.parse('http://localhost:5000/api/Activities'));
+     dynamic response = "";
+
+    if(Role.toString().toLowerCase() == 'admin'){
+       response = await http
+          .get(Uri.parse('http://localhost:5000/api/Activities'));
+    } else{
+
+       response = await http
+          .get(Uri.parse('http://localhost:5000/api/Activities/OnePersonAndTheirActivities?personId=$Id'));
+    }
 
     if (response.statusCode == 200) {
-      return Activity.fromJson(jsonDecode(response.body)[0]);
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((activity) => Activity.fromJson(activity)).toList();
 
     } else {
       throw Exception('Failed to load activity');
     }
+
   }
+
+
 }

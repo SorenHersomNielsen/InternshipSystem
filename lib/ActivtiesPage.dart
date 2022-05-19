@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:internship/Widget/Activties.dart';
 
 class ActivtesPage extends StatefulWidget{
 
-  const ActivtesPage({Key? key}) : super(key: key);
+  ActivtesPage({Key? key, required this.Role, required this.Id}) : super(key: key);
+
+  String Role = '';
+  int Id;
 
   @override
   _ActivtesPageState createState() => _ActivtesPageState();
 }
 
 class _ActivtesPageState extends State<ActivtesPage>{
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +42,8 @@ class _ActivtesPageState extends State<ActivtesPage>{
                 },
               ),
               ListTile(
-                title: const Text(
-                    'Aktiviteter',
+                title: Text(
+                    widget.Role,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black
@@ -53,7 +56,7 @@ class _ActivtesPageState extends State<ActivtesPage>{
             ],
           ),
         ),
+      body: Activtes(Role: widget.Role, Id: widget.Id),
     );
   }
-
 }

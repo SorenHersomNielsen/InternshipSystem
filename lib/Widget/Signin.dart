@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                       if(value != null) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>   ProfilePage(email: _email, password: _password,)),
+                          MaterialPageRoute(builder: (context) => ProfilePage(email: _email, password: _password, Role: value.Role, Id: value.Id)),
                         ),
                       }
                       else{
