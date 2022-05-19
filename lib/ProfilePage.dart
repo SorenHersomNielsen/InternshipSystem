@@ -19,9 +19,6 @@ class _ProfilePageState extends State<ProfilePage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Min Profil'
-        ),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.blue),
       ),
@@ -37,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 title: const Text(
-                    'Min Profil',
+                    'Min profil',
                   style:  TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black
@@ -67,7 +64,6 @@ class _ProfilePageState extends State<ProfilePage>{
       body: Profile(email: widget.email,password: widget.password)
     );
   }
-
 }
 
 
