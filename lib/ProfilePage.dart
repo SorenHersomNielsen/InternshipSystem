@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Widget/Profile.dart';
 import 'package:internship/ActivtiesPage.dart';
+import 'package:internship/PersonsPage.dart';
 
 class ProfilePage extends StatefulWidget{
 
@@ -9,6 +10,7 @@ class ProfilePage extends StatefulWidget{
   final String Role;
   final int Id;
 
+
    ProfilePage({Key? key, required this.email, required this.password, required this.Role, required this.Id }) : super(key: key);
 
 @override
@@ -16,6 +18,19 @@ _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage>{
+
+   bool seepersonspage = false;
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.Role);
+
+    if(widget.Role == 'Admin'){
+      seepersonspage = true;
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +75,24 @@ class _ProfilePageState extends State<ProfilePage>{
                   );
                 },
               ),
+              Visibility(
+                visible: seepersonspage,
+                child: ListTile(
+                  title: const Text(
+                    'Personer',
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PersonsPage()),
+                    );
+                  },
+                ),
+              )
+
             ],
           ),
         ),

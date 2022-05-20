@@ -17,6 +17,18 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
 
   late Future<Person> futureAlbum;
+  late String _newpassword;
+  late String _oldpassword;
+
+  final snackbarFail = const SnackBar(
+    content: Text('noget gik galt, prøve igen :('),
+    backgroundColor: Colors.red,
+  );
+
+  final snackbarGood = const SnackBar(
+    content: Text('Kodeord er skift'),
+    backgroundColor: Colors.green,
+  );
 
   @override
   void initState() {
@@ -27,7 +39,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:Padding(padding: const EdgeInsets.all(20),
+        body: Padding(padding: const EdgeInsets.all(20.0),
           child: FutureBuilder<Person>(
             future: futureAlbum,
             builder: (context, snapshot) {
@@ -81,7 +93,58 @@ class _ProfileState extends State<Profile> {
                         ),
                         textAlign: TextAlign.left,
                       ),
+                      const SizedBox(height: 10.0),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), labelText: 'Nuværende kodeord'),
+                        onChanged: (value) {
+                          _oldpassword  = value;
+                        },
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return 'være venlig at skrive dit kodeord';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 10.0),
+                      TextFormField(
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(width: 5.0)
+                              ), labelText: 'Nye kodeord'),
+                          onChanged: (value) {
+                            _newpassword = value;
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'være venlig at skrive dit nye kodeord';
+                            }
+                            return null;
+                          }),
+                      const SizedBox(height: 10.0),
+                      TextButton(
+                        style: TextButton.styleFrom(backgroundColor: Colors.red),
+                        child:  const Text(
+                          'Skift kodeord',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {
+                          NetworkMethod.changePassword(snapshot.data!.Mail, _oldpassword, _newpassword).then((value) => {
 
+                            if(value == 'Password changes'){
+                              ScaffoldMessenger.of(context).showSnackBar(snackbarGood)
+                            } else{
+                              ScaffoldMessenger.of(context).showSnackBar(snackbarFail)
+                            }
+
+                          });
+
+                          },
+                      ),
                     ]);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

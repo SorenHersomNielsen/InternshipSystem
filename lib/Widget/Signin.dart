@@ -58,13 +58,13 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                   obscureText: true,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Password'),
+                      border: OutlineInputBorder(), labelText: 'Kodeord'),
                   onChanged: (value) {
                     _password = value;
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'være venlig at skrive dit password';
+                      return 'være venlig at skrive dit kodeord';
                     }
                     return null;
                   }),

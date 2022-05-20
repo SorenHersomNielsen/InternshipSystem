@@ -53,8 +53,31 @@ class NetworkMethod{
     } else {
       throw Exception('Failed to load activity');
     }
-
   }
 
+  static Future<String> changePassword (String mail, String oldPassword, String newPassword) async{
 
+    final response = await http
+        .put(Uri.parse('http://localhost:5000/api/Persons/PutPath?email=$mail&oldPassWord=$oldPassword&newPassWord=$newPassword'));
+
+    if(response.statusCode == 200){
+      return 'Password changes';
+    } else{
+      return 'somethings went wrong';
+      }
+    }
+
+  static Future<List<Person>> getPersons() async {
+
+      final response = await http
+          .get(Uri.parse('http://localhost:5000/api/Persons'));
+
+    if (response.statusCode == 200) {
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((person) => Person.fromJson(person)).toList();
+
+    } else {
+      throw Exception('Failed to load Persons');
+    }
+  }
 }
