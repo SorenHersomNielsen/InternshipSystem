@@ -80,4 +80,42 @@ class NetworkMethod{
       throw Exception('Failed to load Persons');
     }
   }
+
+  static Future<http.Response> deletePerson(String id) async {
+    final http.Response response = await http.delete(
+      Uri.parse('http://localhost:5000/api/Persons/$id'),
+    );
+    return response;
+  }
+
+  static Future<Person> createPerson(String name, String mail, String password, String telephoneNumber, String internship, String school, String role) async{
+    print('create');
+    final response = await http.post(
+      Uri.parse('http://localhost:5000/api/Persons'),
+
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'mail': mail,
+        'password': password,
+        'telephoneNumber': telephoneNumber,
+        'internship': internship,
+        'school': school,
+        'role': role
+      }),
+    );
+
+
+
+    if (response.statusCode == 201) {
+
+      return Person.fromJson(jsonDecode(response.body));
+    } else {
+
+      throw Exception('Failed to create person.');
+    }
+  }
 }

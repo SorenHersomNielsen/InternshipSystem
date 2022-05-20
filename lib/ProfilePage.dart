@@ -11,7 +11,7 @@ class ProfilePage extends StatefulWidget{
   final int Id;
 
 
-   ProfilePage({Key? key, required this.email, required this.password, required this.Role, required this.Id }) : super(key: key);
+   const ProfilePage({Key? key, required this.email, required this.password, required this.Role, required this.Id }) : super(key: key);
 
 @override
 _ProfilePageState createState() => _ProfilePageState();
@@ -24,7 +24,6 @@ class _ProfilePageState extends State<ProfilePage>{
   @override
   void initState() {
     super.initState();
-    print(widget.Role);
 
     if(widget.Role == 'Admin'){
       seepersonspage = true;
@@ -92,7 +91,6 @@ class _ProfilePageState extends State<ProfilePage>{
                   },
                 ),
               )
-
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:internship/Widget/Persons.dart';
 
 class PersonsPage extends StatefulWidget{
 
-  PersonsPage({Key? key}) : super(key: key);
+  const PersonsPage({Key? key}) : super(key: key);
 
   @override
   _PersonsPageState createState() => _PersonsPageState();

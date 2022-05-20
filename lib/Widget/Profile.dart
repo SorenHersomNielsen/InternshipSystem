@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/NetworkMethod.dart';
 
-
 class Profile extends StatefulWidget {
 
    Profile({Key? key, required this.password, required this.email}) : super(key: key);
@@ -49,14 +48,14 @@ class _ProfileState extends State<Profile> {
                     children: <Widget>[
                        Text(
                         snapshot.data!.Name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                       ),
                       const SizedBox(height: 10.0),
                        Text(
                         snapshot.data!.Mail,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                         textAlign: TextAlign.left,
@@ -64,7 +63,7 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(height: 10.0),
                        Text(
                          snapshot.data!.TelephoneNumber,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                         textAlign: TextAlign.left,
@@ -72,7 +71,7 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(height: 10.0),
                        Text(
                          snapshot.data!.School,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                         textAlign: TextAlign.left,
@@ -80,7 +79,7 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(height: 10.0),
                       Text(
                         snapshot.data!.Internship,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                         textAlign: TextAlign.left,
@@ -88,7 +87,7 @@ class _ProfileState extends State<Profile> {
                       const SizedBox(height: 10.0),
                       Text(
                         snapshot.data!.Role,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20.0,
                         ),
                         textAlign: TextAlign.left,

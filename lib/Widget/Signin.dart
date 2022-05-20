@@ -4,6 +4,8 @@ import 'package:internship/NetworkMethod.dart';
 
 class SignIn extends StatefulWidget {
 
+  const SignIn({Key? key}) : super(key: key);
+
   @override
   _SignInState createState() => _SignInState();
 }

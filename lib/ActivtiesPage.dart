@@ -44,7 +44,7 @@ class _ActivtesPageState extends State<ActivtesPage>{
               ListTile(
                 title: Text(
                     widget.Role,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black
                   ),
