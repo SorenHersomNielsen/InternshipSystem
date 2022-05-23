@@ -101,30 +101,45 @@ class _PersonsState extends State<Persons> {
                             ),
                             Column(
                               children: <Widget>[
-                                RawMaterialButton(
-                                  child: const Icon(Icons.delete),
-                                  padding: const EdgeInsets.all(15.0),
-                                  shape: const CircleBorder(),
-                                  onPressed: () {
-                                    viewmodel.deletePerson(
+                                Wrap(
+                                  children: <Widget>[
+                                    RawMaterialButton(
+                                      child: const Icon(Icons.edit),
+                                      padding: const EdgeInsets.all(15.0),
+                                      shape: const CircleBorder(),
+                                      onPressed: (){
+
+                                      },
+                                    ),
+
+                                    RawMaterialButton(
+                                      child: const Icon(Icons.delete),
+                                      padding: const EdgeInsets.all(15.0),
+                                      shape: const CircleBorder(),
+                                      onPressed: () {
+                                        viewmodel.deletePerson(
                                             persons[index].Id.toString())
-                                        .then((value) => {
-                                              if (value.statusCode == 200)
-                                                {
-                                                  setState(() {
-                                                    futureActivity =
-                                                        viewmodel.getPersons();
-                                                  })
-                                                }
-                                              else
-                                                {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                          snackbarFail)
-                                                }
-                                            });
-                                  },
+                                            .then((value) => {
+                                          if (value.statusCode == 200)
+                                            {
+                                              setState(() {
+                                                futureActivity =
+                                                    viewmodel.getPersons();
+                                              })
+                                            }
+                                          else
+                                            {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                  snackbarFail)
+                                            }
+                                        });
+                                      },
+                                    )
+
+                                  ],
                                 )
+
                               ],
                             )
                           ],
