@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Widget/AddActivity.dart';
-import 'package:internship/PersonsPage.dart';
-import 'package:internship/ProfilePage.dart';
-import 'package:internship/ActivtiesPage.dart';
+import 'package:internship/Widget/Profile.dart';
+import 'package:internship/Pages/ActivtiesPage.dart';
+import 'package:internship/Pages/PersonsPage.dart';
 
-class AddActivityPage extends StatefulWidget {
-  AddActivityPage(
-      {Key? key,
-      required this.role,
-      required this.id,
-      required this.email,
-      required this.password})
-      : super(key: key);
-
+class ProfilePage extends StatefulWidget {
   final String email;
   final String password;
-  final String role;
-  final int id;
+  final String Role;
+  final int Id;
+
+  const ProfilePage(
+      {Key? key,
+      required this.email,
+      required this.password,
+      required this.Role,
+      required this.Id})
+      : super(key: key);
 
   @override
-  _AddActivityPageState createState() => _AddActivityPageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _AddActivityPageState extends State<AddActivityPage> {
+class _ProfilePageState extends State<ProfilePage> {
   bool seepersonspage = false;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.role == 'Admin') {
+    if (widget.Role == 'Admin') {
       seepersonspage = true;
     }
   }
@@ -54,32 +53,23 @@ class _AddActivityPageState extends State<AddActivityPage> {
               ListTile(
                 title: const Text(
                   'Min profil',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilePage(
-                            email: widget.email,
-                            password: widget.password,
-                            Role: widget.role,
-                            Id: widget.id)),
-                  );
-                },
+                onTap: () {},
               ),
               ListTile(
                 title: const Text(
                   'Aktiviteter',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                  style: TextStyle(color: Colors.black),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ActivtesPage(
-                            role: widget.role,
-                            id: widget.id,
+                            role: widget.Role,
+                            id: widget.Id,
                             email: widget.email,
                             password: widget.password)),
                   );
@@ -97,8 +87,8 @@ class _AddActivityPageState extends State<AddActivityPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => PersonsPage(
-                              Id: widget.id,
-                              Role: widget.role,
+                              Id: widget.Id,
+                              Role: widget.Role,
                               email: widget.email,
                               password: widget.password)),
                     );
@@ -108,8 +98,6 @@ class _AddActivityPageState extends State<AddActivityPage> {
             ],
           ),
         ),
-        body: const AddActivity(
-          restorationId: 'main',
-        ));
+        body: Profile(email: widget.email, password: widget.password));
   }
 }

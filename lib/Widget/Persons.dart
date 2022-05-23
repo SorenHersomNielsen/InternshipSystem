@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
-import 'package:internship/AddPersonPage.dart';
+import 'package:internship/Pages/AddPersonPage.dart';
 
 class Persons extends StatefulWidget {
   const Persons(

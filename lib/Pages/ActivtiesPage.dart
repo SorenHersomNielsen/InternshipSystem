@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Widget/Activties.dart';
-import 'package:internship/ProfilePage.dart';
-import 'package:internship/PersonsPage.dart';
+import 'package:internship/Pages/ProfilePage.dart';
+import 'package:internship/Pages/PersonsPage.dart';
 
 class ActivtesPage extends StatefulWidget {
   const ActivtesPage(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/NetworkMethod.dart';
 import 'package:intl/intl.dart';
-import 'package:internship/AddActivityPage.dart';
+import 'package:internship/Pages/AddActivityPage.dart';
 
 class Activtes extends StatefulWidget {
   Activtes(

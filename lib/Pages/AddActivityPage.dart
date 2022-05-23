@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:internship/ProfilePage.dart';
-import 'package:internship/ActivtiesPage.dart';
-import 'package:internship/PersonsPage.dart';
-import 'package:internship/Widget/AddPerson.dart';
+import 'package:internship/Widget/AddActivity.dart';
+import 'package:internship/Pages/PersonsPage.dart';
+import 'package:internship/Pages/ProfilePage.dart';
+import 'package:internship/Pages/ActivtiesPage.dart';
 
-class AddPersonPage extends StatefulWidget {
-  const AddPersonPage(
+class AddActivityPage extends StatefulWidget {
+  AddActivityPage(
       {Key? key,
-      required this.id,
       required this.role,
-      required this.password,
-      required this.email})
+      required this.id,
+      required this.email,
+      required this.password})
       : super(key: key);
 
   final String email;
@@ -19,10 +19,10 @@ class AddPersonPage extends StatefulWidget {
   final int id;
 
   @override
-  _AddPersonPageState createState() => _AddPersonPageState();
+  _AddActivityPageState createState() => _AddActivityPageState();
 }
 
-class _AddPersonPageState extends State<AddPersonPage> {
+class _AddActivityPageState extends State<AddActivityPage> {
   bool seepersonspage = false;
 
   @override
@@ -54,7 +54,6 @@ class _AddPersonPageState extends State<AddPersonPage> {
               ListTile(
                 title: const Text(
                   'Min profil',
-                  style: TextStyle(color: Colors.black),
                 ),
                 onTap: () {
                   Navigator.push(
@@ -71,7 +70,8 @@ class _AddPersonPageState extends State<AddPersonPage> {
               ListTile(
                 title: const Text(
                   'Aktiviteter',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
                 ),
                 onTap: () {
                   Navigator.push(
@@ -90,16 +90,15 @@ class _AddPersonPageState extends State<AddPersonPage> {
                 child: ListTile(
                   title: const Text(
                     'Personer',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => PersonsPage(
-                              Role: widget.role,
                               Id: widget.id,
+                              Role: widget.role,
                               email: widget.email,
                               password: widget.password)),
                     );
@@ -109,6 +108,8 @@ class _AddPersonPageState extends State<AddPersonPage> {
             ],
           ),
         ),
-        body: AddPerson());
+        body: const AddActivity(
+          restorationId: 'main',
+        ));
   }
 }

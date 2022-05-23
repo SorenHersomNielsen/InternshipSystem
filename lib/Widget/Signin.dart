@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship/ProfilePage.dart';
+import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/NetworkMethod.dart';
 
 class SignIn extends StatefulWidget {
