@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Model/Activty.dart';
-import 'package:internship/NetworkMethod.dart';
 import 'package:intl/intl.dart';
 import 'package:internship/Pages/AddActivityPage.dart';
+import 'package:internship/Viewmodel.dart';
 
 class Activtes extends StatefulWidget {
   Activtes(
@@ -23,6 +23,7 @@ class Activtes extends StatefulWidget {
 }
 
 class _ActivteState extends State<Activtes> {
+  final viewmodel = Viewmodel();
   late Future<List<Activity>> futureActivity;
   DateFormat dateFormat = DateFormat("dd-MM-yyyy ss:mm:HH");
   bool seepersonspage = false;
@@ -30,7 +31,7 @@ class _ActivteState extends State<Activtes> {
   @override
   void initState() {
     super.initState();
-    futureActivity = NetworkMethod.getActivityData(widget.role, widget.id);
+    futureActivity = viewmodel.getActivityData(widget.role, widget.id);
     if (widget.role == 'Admin') {
       seepersonspage = true;
     }

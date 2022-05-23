@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Pages/ProfilePage.dart';
-import 'package:internship/NetworkMethod.dart';
+import 'package:internship/Viewmodel.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -10,6 +10,9 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+
+  final viewmodel =  Viewmodel();
+
   final _formKey = GlobalKey<FormState>();
   late String _email;
   late String _password;
@@ -78,7 +81,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      NetworkMethod.fetchPerson(_email, _password)
+                      viewmodel.login(_email, _password)
                           .then((value) => {
                                 if (value != null)
                                   {

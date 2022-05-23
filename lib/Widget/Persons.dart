@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Pages/AddPersonPage.dart';
+import 'package:internship/Viewmodel.dart';
 
 class Persons extends StatefulWidget {
   const Persons(
@@ -24,6 +24,8 @@ class Persons extends StatefulWidget {
 class _PersonsState extends State<Persons> {
   late Future<List<Person>> futureActivity;
 
+  final viewmodel =  Viewmodel();
+
   final snackbarFail = const SnackBar(
     content: Text('noget gik galt, prøve igen :('),
     backgroundColor: Colors.red,
@@ -32,7 +34,7 @@ class _PersonsState extends State<Persons> {
   @override
   void initState() {
     super.initState();
-    futureActivity = NetworkMethod.getPersons();
+    futureActivity = viewmodel.getPersons();
   }
 
   @override
@@ -104,15 +106,14 @@ class _PersonsState extends State<Persons> {
                                   padding: const EdgeInsets.all(15.0),
                                   shape: const CircleBorder(),
                                   onPressed: () {
-                                    NetworkMethod.deletePerson(
+                                    viewmodel.deletePerson(
                                             persons[index].Id.toString())
                                         .then((value) => {
                                               if (value.statusCode == 200)
                                                 {
                                                   setState(() {
                                                     futureActivity =
-                                                        NetworkMethod
-                                                            .getPersons();
+                                                        viewmodel.getPersons();
                                                   })
                                                 }
                                               else

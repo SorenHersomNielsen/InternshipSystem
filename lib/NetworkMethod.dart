@@ -5,7 +5,8 @@ import 'dart:async';
 import 'dart:convert';
 
 class NetworkMethod {
-  static Future<Person?> fetchPerson(String email, String password) async {
+
+  Future<Person?> fetchPerson(String email, String password) async {
     final response = await http.get(Uri.parse(
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
@@ -16,7 +17,7 @@ class NetworkMethod {
     }
   }
 
-  static Future<Person> getPersonData(String email, String password) async {
+   Future<Person> getPersonData(String email, String password) async {
     final response = await http.get(Uri.parse(
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
@@ -27,7 +28,7 @@ class NetworkMethod {
     }
   }
 
-  static Future<List<Activity>> getActivityData(String Role, int Id) async {
+   Future<List<Activity>> getActivityData(String Role, int Id) async {
     dynamic response = "";
 
     if (Role.toString().toLowerCase() == 'admin') {
@@ -48,7 +49,7 @@ class NetworkMethod {
     }
   }
 
-  static Future<String> changePassword(
+   Future<String> changePassword(
       String mail, String oldPassword, String newPassword) async {
     final response = await http.put(Uri.parse(
         'http://localhost:5000/api/Persons/PutPath?email=$mail&oldPassWord=$oldPassword&newPassWord=$newPassword'));
@@ -60,7 +61,7 @@ class NetworkMethod {
     }
   }
 
-  static Future<List<Person>> getPersons() async {
+   Future<List<Person>> getPersons() async {
     final response =
         await http.get(Uri.parse('http://localhost:5000/api/Persons'));
 
@@ -72,14 +73,14 @@ class NetworkMethod {
     }
   }
 
-  static Future<http.Response> deletePerson(String id) async {
+   Future<http.Response> deletePerson(String id) async {
     final http.Response response = await http.delete(
       Uri.parse('http://localhost:5000/api/Persons/$id'),
     );
     return response;
   }
 
-  static Future<Person> createPerson(
+   Future<Person> createPerson(
       String name,
       String mail,
       String password,

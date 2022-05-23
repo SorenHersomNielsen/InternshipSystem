@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
-import 'package:internship/NetworkMethod.dart';
+import 'package:internship/Viewmodel.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key, required this.password, required this.email})
@@ -14,6 +14,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+  final viewmodel =  Viewmodel();
   late Future<Person> futureAlbum;
   late String _newpassword;
   late String _oldpassword;
@@ -31,7 +33,7 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = NetworkMethod.getPersonData(widget.email, widget.password);
+    futureAlbum = viewmodel.getPersonData(widget.email, widget.password);
   }
 
   @override
@@ -133,7 +135,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       onPressed: () {
-                        NetworkMethod.changePassword(
+                        viewmodel.changePassword(
                                 snapshot.data!.Mail, _oldpassword, _newpassword)
                             .then((value) => {
                                   if (value == 'Password changes')

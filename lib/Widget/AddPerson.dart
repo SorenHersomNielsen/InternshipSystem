@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship/NetworkMethod.dart';
+import 'package:internship/Viewmodel.dart';
 
 class AddPerson extends StatefulWidget {
   const AddPerson({Key? key}) : super(key: key);
@@ -9,6 +9,8 @@ class AddPerson extends StatefulWidget {
 }
 
 class _AddPersonState extends State<AddPerson> {
+
+  final viewmodel =  Viewmodel();
   final _formKey = GlobalKey<FormState>();
   late String _name;
   late String _mail;
@@ -155,7 +157,7 @@ class _AddPersonState extends State<AddPerson> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        NetworkMethod.createPerson(
+                        viewmodel.createPerson(
                                 _name,
                                 _mail,
                                 _password,
