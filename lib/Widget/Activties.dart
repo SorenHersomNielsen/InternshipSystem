@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/NetworkMethod.dart';
 import 'package:intl/intl.dart';
+import 'package:internship/AddActivityPage.dart';
 
 class Activtes extends StatefulWidget {
   Activtes({Key? key, required this.Role, required this.Id}) : super(key: key);
@@ -105,6 +106,10 @@ class _ActivteState extends State<Activtes> {
           visible: seepersonspage,
           child: FloatingActionButton(
             onPressed: () {
+              Navigator.push(
+              context,
+               MaterialPageRoute(builder: (context) => AddActivityPage(Role: widget.Role)),
+              );
 
             },
             tooltip: 'Tilføj Aktiviteter',
