@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:internship/NetworkMethod.dart';
 
 class AddActivity extends StatefulWidget {
   const AddActivity({Key? key, required this.restorationId}) : super(key: key);
@@ -20,9 +19,9 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
   String? get restorationId => widget.restorationId;
 
   final RestorableDateTime _selectedDate =
-  RestorableDateTime(DateTime(2021, 7, 25));
+      RestorableDateTime(DateTime(2021, 7, 25));
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
-  RestorableRouteFuture<DateTime?>(
+      RestorableRouteFuture<DateTime?>(
     onComplete: _selectDate,
     onPresent: (NavigatorState navigator, Object? arguments) {
       return navigator.restorablePush(
@@ -33,9 +32,9 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
   );
 
   static Route<DateTime> _datePickerRoute(
-      BuildContext context,
-      Object? arguments,
-      ) {
+    BuildContext context,
+    Object? arguments,
+  ) {
     return DialogRoute<DateTime>(
       context: context,
       builder: (BuildContext context) {
@@ -136,8 +135,6 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                     },
                   ),
                   const SizedBox(height: 10),
-
                 ]))));
   }
 }
-

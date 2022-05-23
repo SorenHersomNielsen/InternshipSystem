@@ -67,8 +67,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            ActivtesPage(Role: widget.Role, Id: widget.Id)),
+                        builder: (context) => ActivtesPage(
+                            role: widget.Role,
+                            id: widget.Id,
+                            email: widget.email,
+                            password: widget.password)),
                   );
                 },
               ),
@@ -82,7 +85,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PersonsPage()),
+                      MaterialPageRoute(
+                          builder: (context) => PersonsPage(
+                              Id: widget.Id,
+                              Role: widget.Role,
+                              email: widget.email,
+                              password: widget.password)),
                     );
                   },
                 ),

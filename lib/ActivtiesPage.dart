@@ -1,18 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Widget/Activties.dart';
+import 'package:internship/ProfilePage.dart';
+import 'package:internship/PersonsPage.dart';
 
 class ActivtesPage extends StatefulWidget {
-  ActivtesPage({Key? key, required this.Role, required this.Id})
+  const ActivtesPage(
+      {Key? key,
+      required this.role,
+      required this.id,
+      required this.email,
+      required this.password})
       : super(key: key);
 
-  String Role = '';
-  int Id;
+  final String email;
+  final String password;
+  final String role;
+  final int id;
 
   @override
   _ActivtesPageState createState() => _ActivtesPageState();
 }
 
 class _ActivtesPageState extends State<ActivtesPage> {
+  bool seepersonspage = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.role == 'Admin') {
+      seepersonspage = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,20 +55,54 @@ class _ActivtesPageState extends State<ActivtesPage> {
                 'Min profil',
                 style: TextStyle(color: Colors.black),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(
+                          email: widget.email,
+                          password: widget.password,
+                          Role: widget.role,
+                          Id: widget.id)),
+                );
+              },
             ),
             ListTile(
-              title: Text(
-                widget.Role,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.black),
+              title: const Text(
+                'Aktiviteter',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               onTap: () {},
             ),
+            Visibility(
+              visible: seepersonspage,
+              child: ListTile(
+                title: const Text(
+                  'Personer',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PersonsPage(
+                            Id: widget.id,
+                            Role: widget.role,
+                            email: widget.email,
+                            password: widget.password)),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
-      body: Activtes(Role: widget.Role, Id: widget.Id),
+      body: Activtes(
+          role: widget.role,
+          id: widget.id,
+          email: widget.email,
+          password: widget.password),
     );
   }
 }

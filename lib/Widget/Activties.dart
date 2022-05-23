@@ -5,10 +5,18 @@ import 'package:intl/intl.dart';
 import 'package:internship/AddActivityPage.dart';
 
 class Activtes extends StatefulWidget {
-  Activtes({Key? key, required this.Role, required this.Id}) : super(key: key);
+  Activtes(
+      {Key? key,
+      required this.role,
+      required this.id,
+      required this.email,
+      required this.password})
+      : super(key: key);
 
-  String Role = '';
-  int Id;
+  final String email;
+  final String password;
+  final String role;
+  final int id;
 
   @override
   _ActivteState createState() => _ActivteState();
@@ -22,8 +30,8 @@ class _ActivteState extends State<Activtes> {
   @override
   void initState() {
     super.initState();
-    futureActivity = NetworkMethod.getActivityData(widget.Role, widget.Id);
-    if (widget.Role == 'Admin') {
+    futureActivity = NetworkMethod.getActivityData(widget.role, widget.id);
+    if (widget.role == 'Admin') {
       seepersonspage = true;
     }
   }
@@ -107,10 +115,15 @@ class _ActivteState extends State<Activtes> {
           child: FloatingActionButton(
             onPressed: () {
               Navigator.push(
-              context,
-               MaterialPageRoute(builder: (context) => AddActivityPage(Role: widget.Role)),
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddActivityPage(
+                          role: widget.role,
+                          id: widget.id,
+                          email: widget.email,
+                          password: widget.password,
+                        )),
               );
-
             },
             tooltip: 'Tilføj Aktiviteter',
             child: const Icon(Icons.add),

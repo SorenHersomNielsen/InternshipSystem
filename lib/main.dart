@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(body:Padding(padding: EdgeInsets.all(20), child: SignIn())),
+      home:
+          Scaffold(body: Padding(padding: EdgeInsets.all(20), child: SignIn())),
     );
   }
 }
-

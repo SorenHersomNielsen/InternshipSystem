@@ -9,11 +9,11 @@ class Activity {
     required this.Date,
   });
 
-  factory Activity.fromJson(Map<String,dynamic> json) {
+  factory Activity.fromJson(Map<String, dynamic> json) {
     return Activity(
-        Id: json['id'],
-        Headline: json['headline'],
-        Date: json['date'],
+      Id: json['id'],
+      Headline: json['headline'],
+      Date: json['date'],
     );
   }
 }

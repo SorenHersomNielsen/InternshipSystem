@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
-import 'package:internship/Widget/AddPerson.dart';
+import 'package:internship/AddPersonPage.dart';
 
 class Persons extends StatefulWidget {
-  const Persons({Key? key}) : super(key: key);
+  const Persons(
+      {Key? key,
+      required this.id,
+      required this.role,
+      required this.email,
+      required this.password})
+      : super(key: key);
+
+  final String email;
+  final String password;
+  final String role;
+  final int id;
 
   @override
   _PersonsState createState() => _PersonsState();
@@ -131,7 +142,12 @@ class _PersonsState extends State<Persons> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddPerson()),
+            MaterialPageRoute(
+                builder: (context) => AddPersonPage(
+                    id: widget.id,
+                    role: widget.role,
+                    password: widget.password,
+                    email: widget.email)),
           );
         },
         tooltip: 'Tilføj person',

@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Widget/Persons.dart';
 import 'package:internship/ProfilePage.dart';
 import 'package:internship/ActivtiesPage.dart';
+import 'package:internship/PersonsPage.dart';
+import 'package:internship/Widget/AddPerson.dart';
 
-class PersonsPage extends StatefulWidget {
-  const PersonsPage(
+class AddPersonPage extends StatefulWidget {
+  const AddPersonPage(
       {Key? key,
-      required this.Id,
-      required this.Role,
+      required this.id,
+      required this.role,
       required this.password,
       required this.email})
       : super(key: key);
 
   final String email;
   final String password;
-  final String Role;
-  final int Id;
+  final String role;
+  final int id;
 
   @override
-  _PersonsPageState createState() => _PersonsPageState();
+  _AddPersonPageState createState() => _AddPersonPageState();
 }
 
-class _PersonsPageState extends State<PersonsPage> {
+class _AddPersonPageState extends State<AddPersonPage> {
   bool seepersonspage = false;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.Role == 'Admin') {
+    if (widget.role == 'Admin') {
       seepersonspage = true;
     }
   }
@@ -62,8 +63,8 @@ class _PersonsPageState extends State<PersonsPage> {
                         builder: (context) => ProfilePage(
                             email: widget.email,
                             password: widget.password,
-                            Role: widget.Role,
-                            Id: widget.Id)),
+                            Role: widget.role,
+                            Id: widget.id)),
                   );
                 },
               ),
@@ -77,8 +78,8 @@ class _PersonsPageState extends State<PersonsPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ActivtesPage(
-                            role: widget.Role,
-                            id: widget.Id,
+                            role: widget.role,
+                            id: widget.id,
                             email: widget.email,
                             password: widget.password)),
                   );
@@ -92,16 +93,22 @@ class _PersonsPageState extends State<PersonsPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PersonsPage(
+                              Role: widget.role,
+                              Id: widget.id,
+                              email: widget.email,
+                              password: widget.password)),
+                    );
+                  },
                 ),
               )
             ],
           ),
         ),
-        body: Persons(
-            role: widget.Role,
-            id: widget.Id,
-            email: widget.email,
-            password: widget.password));
+        body: AddPerson());
   }
 }

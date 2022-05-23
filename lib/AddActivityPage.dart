@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Widget/Persons.dart';
-import 'package:internship/PersonsPage.dart';
 import 'package:internship/Widget/AddActivity.dart';
+import 'package:internship/PersonsPage.dart';
+import 'package:internship/ProfilePage.dart';
+import 'package:internship/ActivtiesPage.dart';
 
 class AddActivityPage extends StatefulWidget {
-  AddActivityPage({Key? key, required this.Role }) : super(key: key);
+  AddActivityPage(
+      {Key? key,
+      required this.role,
+      required this.id,
+      required this.email,
+      required this.password})
+      : super(key: key);
 
-   String Role ='';
+  final String email;
+  final String password;
+  final String role;
+  final int id;
 
   @override
   _AddActivityPageState createState() => _AddActivityPageState();
 }
 
 class _AddActivityPageState extends State<AddActivityPage> {
-
   bool seepersonspage = false;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.Role == 'Admin') {
+    if (widget.role == 'Admin') {
       seepersonspage = true;
     }
   }
@@ -45,9 +54,18 @@ class _AddActivityPageState extends State<AddActivityPage> {
               ListTile(
                 title: const Text(
                   'Min profil',
-
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                            email: widget.email,
+                            password: widget.password,
+                            Role: widget.role,
+                            Id: widget.id)),
+                  );
+                },
               ),
               ListTile(
                 title: const Text(
@@ -56,10 +74,15 @@ class _AddActivityPageState extends State<AddActivityPage> {
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
                 onTap: () {
-                  //Navigator.push(
-                  //context,
-                  // MaterialPageRoute(builder: (context) => ActivtesPage(Role: widget.Role, Id: widget.Id)),
-                  //);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ActivtesPage(
+                            role: widget.role,
+                            id: widget.id,
+                            email: widget.email,
+                            password: widget.password)),
+                  );
                 },
               ),
               Visibility(
@@ -72,7 +95,12 @@ class _AddActivityPageState extends State<AddActivityPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PersonsPage()),
+                      MaterialPageRoute(
+                          builder: (context) => PersonsPage(
+                              Id: widget.id,
+                              Role: widget.role,
+                              email: widget.email,
+                              password: widget.password)),
                     );
                   },
                 ),
@@ -80,6 +108,8 @@ class _AddActivityPageState extends State<AddActivityPage> {
             ],
           ),
         ),
-        body: AddActivity(restorationId: 'main',));
+        body: const AddActivity(
+          restorationId: 'main',
+        ));
   }
 }

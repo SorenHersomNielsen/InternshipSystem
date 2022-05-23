@@ -155,7 +155,6 @@ class _AddPersonState extends State<AddPerson> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        print('tryk');
                         NetworkMethod.createPerson(
                                 _name,
                                 _mail,
