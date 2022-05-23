@@ -3,16 +3,15 @@ import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Widget/AddPerson.dart';
 
-class Persons extends StatefulWidget{
-
+class Persons extends StatefulWidget {
   const Persons({Key? key}) : super(key: key);
 
   @override
   _PersonsState createState() => _PersonsState();
 }
 
-class _PersonsState extends State<Persons>{
-  late Future <List<Person>> futureActivity;
+class _PersonsState extends State<Persons> {
+  late Future<List<Person>> futureActivity;
 
   final snackbarFail = const SnackBar(
     content: Text('noget gik galt, prøve igen :('),
@@ -28,7 +27,8 @@ class _PersonsState extends State<Persons>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:Padding(padding: const EdgeInsets.all(20),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
         child: FutureBuilder<List<Person>>(
           future: futureActivity,
           builder: (context, snapshot) {
@@ -38,21 +38,18 @@ class _PersonsState extends State<Persons>{
                   itemCount: persons.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
-                      onTap: () {
-
-                      },
+                      onTap: () {},
                       child: Container(
                         margin: const EdgeInsets.only(
                             top: 5.0, bottom: 5.0, right: 20.0),
                         padding: const EdgeInsets.symmetric(
-                         horizontal: 20.0, vertical: 10.0),
-                        decoration:  BoxDecoration(
+                            horizontal: 20.0, vertical: 10.0),
+                        decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(
-                            topRight:  Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0),
-                            topLeft: Radius.circular(20.0),
-                            bottomLeft: Radius.circular(20.0)
-                          ),
+                              topRight: Radius.circular(20.0),
+                              bottomRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                              bottomLeft: Radius.circular(20.0)),
                           color: Colors.grey.shade400,
                         ),
                         child: Row(
@@ -73,8 +70,8 @@ class _PersonsState extends State<Persons>{
                                     ),
                                     const SizedBox(height: 5.0),
                                     SizedBox(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.45,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.45,
                                       child: Text(
                                         persons[index].Mail,
                                         style: const TextStyle(
@@ -92,34 +89,37 @@ class _PersonsState extends State<Persons>{
                             Column(
                               children: <Widget>[
                                 RawMaterialButton(
-                                  child: const Icon(
-                                    Icons.delete
-                                  ),
+                                  child: const Icon(Icons.delete),
                                   padding: const EdgeInsets.all(15.0),
                                   shape: const CircleBorder(),
                                   onPressed: () {
-                                    NetworkMethod.deletePerson(persons[index].Id.toString()).then((value) => {
-                                      if(value.statusCode == 200){
-                                        setState((){
-                                          futureActivity = NetworkMethod.getPersons();
-                                        })
-                                      }
-                                      else{
-                                        ScaffoldMessenger.of(context).showSnackBar(snackbarFail)
-                                      }
-                                    });
-
+                                    NetworkMethod.deletePerson(
+                                            persons[index].Id.toString())
+                                        .then((value) => {
+                                              if (value.statusCode == 200)
+                                                {
+                                                  setState(() {
+                                                    futureActivity =
+                                                        NetworkMethod
+                                                            .getPersons();
+                                                  })
+                                                }
+                                              else
+                                                {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                          snackbarFail)
+                                                }
+                                            });
                                   },
                                 )
-
                               ],
                             )
                           ],
                         ),
                       ),
                     );
-                  }
-              );
+                  });
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
@@ -127,14 +127,12 @@ class _PersonsState extends State<Persons>{
           },
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddPerson()),
           );
-
         },
         tooltip: 'Tilføj person',
         child: const Icon(Icons.add),

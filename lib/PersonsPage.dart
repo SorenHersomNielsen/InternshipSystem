@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Widget/Persons.dart';
 
-class PersonsPage extends StatefulWidget{
-
+class PersonsPage extends StatefulWidget {
   const PersonsPage({Key? key}) : super(key: key);
 
   @override
   _PersonsPageState createState() => _PersonsPageState();
 }
 
-class _PersonsPageState extends State<PersonsPage>{
-
+class _PersonsPageState extends State<PersonsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,34 +29,26 @@ class _PersonsPageState extends State<PersonsPage>{
               ListTile(
                 title: const Text(
                   'Min profil',
-                  style:  TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black
-                  ),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               ListTile(
                 title: const Text(
                   'Aktiviteter',
-                  style: TextStyle(
-                      color: Colors.black
-                  ),
+                  style: TextStyle(color: Colors.black),
                 ),
                 onTap: () {
                   //Navigator.push(
-                    //context,
-                   // MaterialPageRoute(builder: (context) => ActivtesPage(Role: widget.Role, Id: widget.Id)),
+                  //context,
+                  // MaterialPageRoute(builder: (context) => ActivtesPage(Role: widget.Role, Id: widget.Id)),
                   //);
-               },
+                },
               ),
-
             ],
           ),
         ),
-        body: Persons()
-    );
+        body: Persons());
   }
 }

@@ -8,7 +8,6 @@ class Person {
   final String School;
   final String Role;
 
-
   const Person({
     required this.Id,
     required this.Name,
@@ -33,3 +32,6 @@ class Person {
     );
   }
 }
+
+
+

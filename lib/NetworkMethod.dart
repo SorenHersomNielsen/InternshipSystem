@@ -8,6 +8,8 @@ class NetworkMethod{
 
   static Future<Person?> fetchPerson(String email, String password) async {
 
+    print('http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password');
+
     final response = await http
         .get(Uri.parse('http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
@@ -31,7 +33,6 @@ class NetworkMethod{
       throw Exception('Failed to load person');
     }
   }
-
 
   static Future<List<Activity>> getActivityData(String Role, int Id) async {
 
@@ -107,8 +108,6 @@ class NetworkMethod{
         'role': role
       }),
     );
-
-
 
     if (response.statusCode == 201) {
 

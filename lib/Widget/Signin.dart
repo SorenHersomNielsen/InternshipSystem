@@ -3,7 +3,6 @@ import 'package:internship/ProfilePage.dart';
 import 'package:internship/NetworkMethod.dart';
 
 class SignIn extends StatefulWidget {
-
   const SignIn({Key? key}) : super(key: key);
 
   @override
@@ -34,29 +33,26 @@ class _SignInState extends State<SignIn> {
           child: Form(
             key: _formKey,
             child: Column(children: <Widget>[
-               const Text(
+              const Text(
                 'Log på',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.red
-                ),
+                style: TextStyle(fontSize: 40, color: Colors.red),
               ),
-               const SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Email'),
                 onChanged: (value) {
                   _email = value;
                 },
-                validator: (value){
-                  if(value!.isEmpty){
+                validator: (value) {
+                  if (value!.isEmpty) {
                     return 'være venlig at skrive dit mail';
                   }
                   return null;
                 },
               ),
-               const SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextFormField(
                   obscureText: true,
                   decoration: const InputDecoration(
@@ -70,37 +66,46 @@ class _SignInState extends State<SignIn> {
                     }
                     return null;
                   }),
-               const SizedBox(height: 10),
-            SizedBox(
-              child: TextButton(
-                style: TextButton.styleFrom(backgroundColor: Colors.red),
-                child:  const Text(
-                  'Log på',
-                 style: TextStyle(
-                   color: Colors.white,
-                 ),
-                ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    NetworkMethod.fetchPerson(_email,_password).then((value) => {
-
-                      if(value != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProfilePage(email: _email, password: _password, Role: value.Role, Id: value.Id)),
-                        ),
-                      }
-                      else{
-                        ScaffoldMessenger.of(context).showSnackBar(snackballfall)
-                      }
-                    });
-                  };
+              const SizedBox(height: 10),
+              SizedBox(
+                child: TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.red),
+                  child: const Text(
+                    'Log på',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      NetworkMethod.fetchPerson(_email, _password)
+                          .then((value) => {
+                                if (value != null)
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProfilePage(
+                                              email: _email,
+                                              password: _password,
+                                              Role: value.Role,
+                                              Id: value.Id)),
+                                    ),
+                                  }
+                                else
+                                  {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackballfall)
+                                  }
+                              });
+                    }
+                    ;
                   },
-              ),
-            )
+                ),
+              )
             ]),
           ),
-        ) ,
+        ),
       ),
     );
   }

@@ -3,42 +3,44 @@ import 'package:internship/Widget/Profile.dart';
 import 'package:internship/ActivtiesPage.dart';
 import 'package:internship/PersonsPage.dart';
 
-class ProfilePage extends StatefulWidget{
-
+class ProfilePage extends StatefulWidget {
   final String email;
   final String password;
   final String Role;
   final int Id;
 
+  const ProfilePage(
+      {Key? key,
+      required this.email,
+      required this.password,
+      required this.Role,
+      required this.Id})
+      : super(key: key);
 
-   const ProfilePage({Key? key, required this.email, required this.password, required this.Role, required this.Id }) : super(key: key);
-
-@override
-_ProfilePageState createState() => _ProfilePageState();
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>{
-
-   bool seepersonspage = false;
+class _ProfilePageState extends State<ProfilePage> {
+  bool seepersonspage = false;
 
   @override
   void initState() {
     super.initState();
 
-    if(widget.Role == 'Admin'){
+    if (widget.Role == 'Admin') {
       seepersonspage = true;
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.blue),
-      ),
-       drawer: Drawer(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.blue),
+        ),
+        drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -50,27 +52,23 @@ class _ProfilePageState extends State<ProfilePage>{
               ),
               ListTile(
                 title: const Text(
-                    'Min profil',
-                  style:  TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black
-                  ),
+                  'Min profil',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               ListTile(
                 title: const Text(
-                    'Aktiviteter',
-                  style: TextStyle(
-                    color: Colors.black
-                  ),
+                  'Aktiviteter',
+                  style: TextStyle(color: Colors.black),
                 ),
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ActivtesPage(Role: widget.Role, Id: widget.Id)),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ActivtesPage(Role: widget.Role, Id: widget.Id)),
                   );
                 },
               ),
@@ -79,9 +77,7 @@ class _ProfilePageState extends State<ProfilePage>{
                 child: ListTile(
                   title: const Text(
                     'Personer',
-                    style: TextStyle(
-                        color: Colors.black
-                    ),
+                    style: TextStyle(color: Colors.black),
                   ),
                   onTap: () {
                     Navigator.push(
@@ -94,9 +90,6 @@ class _ProfilePageState extends State<ProfilePage>{
             ],
           ),
         ),
-      body: Profile(email: widget.email,password: widget.password)
-    );
+        body: Profile(email: widget.email, password: widget.password));
   }
 }
-
-
