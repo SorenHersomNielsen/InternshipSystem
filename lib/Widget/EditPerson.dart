@@ -60,7 +60,7 @@ class _EditPersonState extends State<EditPerson> {
                   children: <Widget>[
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: name),
+                          border: const OutlineInputBorder(), labelText: name),
                       onChanged: (value) {
                         name = value;
                       },
@@ -68,7 +68,7 @@ class _EditPersonState extends State<EditPerson> {
                     const SizedBox(height: 10.0),
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: mail),
+                          border: const OutlineInputBorder(), labelText: mail),
                       onChanged: (value) {
                         mail = value;
                       },
@@ -76,7 +76,7 @@ class _EditPersonState extends State<EditPerson> {
                     const SizedBox(height: 10.0),
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: password),
+                          border: const OutlineInputBorder(), labelText: password),
                       onChanged: (value) {
                         password = value;
                       },
@@ -84,7 +84,7 @@ class _EditPersonState extends State<EditPerson> {
                     const SizedBox(height: 10.0),
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: telephoneNumber),
+                          border: const OutlineInputBorder(), labelText: telephoneNumber),
                       onChanged: (value) {
                         telephoneNumber = value;
                       },
@@ -92,7 +92,7 @@ class _EditPersonState extends State<EditPerson> {
                     const SizedBox(height: 10.0),
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: internship),
+                          border: const OutlineInputBorder(), labelText: internship),
                       onChanged: (value) {
                         internship = value;
                       },
@@ -100,7 +100,7 @@ class _EditPersonState extends State<EditPerson> {
                     const SizedBox(height: 10.0),
                     TextFormField(
                       decoration:  InputDecoration(
-                          border: OutlineInputBorder(), labelText: school),
+                          border: const OutlineInputBorder(), labelText: school),
                       onChanged: (value) {
                         school = value;
                       },

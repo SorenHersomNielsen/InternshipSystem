@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Widget/Activties.dart';
 import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/PersonsPage.dart';
-import 'package:internship/Widget/Profile.dart';
 import 'package:internship/Widget/SeeActivity.dart';
 
 class SeeActivityPage extends StatefulWidget {

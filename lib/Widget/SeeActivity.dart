@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
-import 'package:internship/Model/Activty.dart';
 
 class SeeActivity extends StatefulWidget {
   const SeeActivity({Key? key, required this.userId, required this.ActivityId, required this.date, required this.headline})
@@ -16,7 +15,7 @@ class SeeActivity extends StatefulWidget {
 }
 
 class _SeeActivityState extends State<SeeActivity> {
-  
+
   final viewmodel = Viewmodel();
 
   @override
@@ -28,9 +27,9 @@ class _SeeActivityState extends State<SeeActivity> {
                     children: <Widget>[
                       Column(
                         children: <Widget>[
-                          Text(
+                           Text(
                             widget.headline,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20.0,
                             ),
                           ),
@@ -47,7 +46,7 @@ class _SeeActivityState extends State<SeeActivity> {
                             children: <Widget>[
                               ElevatedButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Tilmeld',
                                   style: TextStyle(color: Colors.white),
                                 ),
@@ -58,7 +57,7 @@ class _SeeActivityState extends State<SeeActivity> {
                               const SizedBox(width: 5),
                               ElevatedButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Frameld',
                                   style: TextStyle(color: Colors.white),
                                 ),
@@ -69,7 +68,7 @@ class _SeeActivityState extends State<SeeActivity> {
                               const SizedBox(width: 5),
                               ElevatedButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   'Ved ikke',
                                   style: TextStyle(color: Colors.white),
                                 ),

@@ -109,6 +109,6 @@ class _AddPersonPageState extends State<AddPersonPage> {
             ],
           ),
         ),
-        body: AddPerson());
+        body: const AddPerson());
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
-import 'package:intl/intl.dart';
 
 class AddActivity extends StatefulWidget {
   const AddActivity({Key? key, required this.restorationId}) : super(key: key);
@@ -142,7 +141,7 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                     onPressed: () {
                       _restorableDatePickerRouteFuture.present();
                     },
-                    child: Text('$activityDay'),
+                    child: Text(activityDay),
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
@@ -162,7 +161,6 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                       if (_formKey.currentState!.validate()) {
 
                         final DateTime todatetime = DateTime(year,month,day, _Hour, _min );
-                        print(todatetime);
 
                         viewmodel.createActivity(_Headline, todatetime)
                             .then((value) => {
