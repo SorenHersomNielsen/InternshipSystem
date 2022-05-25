@@ -3,11 +3,11 @@ import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/Person.dart';
 
 class EditPerson extends StatefulWidget {
-   EditPerson({Key? key, required this.id, required this._mail, required this._password}) : super(key: key);
+   EditPerson({Key? key, required this.id, required this.mail, required this.password}) : super(key: key);
 
   int id;
-  String _mail;
-  String _password;
+  String mail;
+  String password;
 
   @override
   _EditPersonState createState() => _EditPersonState();
@@ -35,7 +35,7 @@ class _EditPersonState extends State<EditPerson> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = viewmodel.getPersonData(widget._mail, widget._password);
+    futureAlbum = viewmodel.getPersonData(widget.mail, widget.password);
   }
 
   @override

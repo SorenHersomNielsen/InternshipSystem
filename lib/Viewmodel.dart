@@ -51,5 +51,4 @@ class Viewmodel {
   Future<Person> changePerson( int id, String mail, String name, String password, String telephonenumber, String internship, String school, String role){
     return networkMethod.changePerson(id, mail, name, password, telephonenumber, internship, school, role);
   }
-
 }

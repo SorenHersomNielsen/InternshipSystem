@@ -11,13 +11,20 @@ class SeeActivityPage extends StatefulWidget {
         required this.role,
         required this.id,
         required this.email,
-        required this.password})
+        required this.password,
+        required this.Activityid,
+        required this.headline,
+        required this.date
+      })
       : super(key: key);
 
   final String email;
   final String password;
   final String role;
   final int id;
+  final int Activityid;
+  final String date;
+  final String headline;
 
   @override
   _SeeActivityPageState createState() => _SeeActivityPageState();
@@ -100,7 +107,7 @@ class _SeeActivityPageState extends State<SeeActivityPage> {
           ],
         ),
       ),
-      body: SeeActivity(userId: widget.id,),
+      body: SeeActivity(userId: widget.id, ActivityId: widget.Activityid,headline: widget.headline,date: widget.date),
     );
   }
 }

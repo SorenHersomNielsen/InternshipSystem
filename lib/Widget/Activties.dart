@@ -61,6 +61,10 @@ class _ActivteState extends State<Activtes> {
                                   id: widget.id,
                                   email: widget.email,
                                   password: widget.password,
+                                  Activityid: activity[index].Id,
+                                  headline: activity[index].Headline,
+                                  date: activity[index].Date,
+
                                 )),
                           );
                         },

@@ -99,7 +99,7 @@ class _PersonsPageState extends State<EditPersonsPage> {
             ],
           ),
         ),
-        body: EditPerson(id: widget.Id, _mail: widget.email, _password: widget.password,)
+        body: EditPerson(id: widget.Id, mail: widget.email, password: widget.password,)
     );
   }
 }
