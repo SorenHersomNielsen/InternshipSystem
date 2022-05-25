@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Pages/AddPersonPage.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/Pages/EditPersonPage.dart';
 
 class Persons extends StatefulWidget {
   const Persons(
@@ -108,6 +109,17 @@ class _PersonsState extends State<Persons> {
                                       padding: const EdgeInsets.all(15.0),
                                       shape: const CircleBorder(),
                                       onPressed: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => EditPersonsPage(
+                                                Id: persons[index].Id,
+                                                Role: persons[index].Role,
+                                                password: persons[index].Password,
+                                                email: persons[index].Mail
+                                              )),
+                                        );
+
 
                                       },
                                     ),

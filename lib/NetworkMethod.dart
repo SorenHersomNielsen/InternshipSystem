@@ -130,4 +130,34 @@ class NetworkMethod {
       throw Exception('Failed to create activity');
     }
   }
+
+  Future<Person> changePerson(
+      int id, String mail, String name, String password, String telephonenumber, String internship, String school, String role) async {
+    final response = await http.put(Uri.parse(
+       'http://localhost:5000/api/Persons/$id'),
+
+    headers: <String, String>{
+      'Content-Type': 'application/json',
+    },
+
+    body: jsonEncode(<String, String>{
+    'name': name,
+    'mail': mail,
+    'password': password,
+    'telephonenumber': telephonenumber,
+    'internship': internship,
+    'school': school,
+    'role': role
+    }),
+    );
+
+    if (response.statusCode == 200) {
+      return Person.fromJson(jsonDecode(response.body));
+    } else {
+    throw Exception('Fail');
+
+    }
+  }
+
+
 }

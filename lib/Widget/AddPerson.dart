@@ -27,7 +27,7 @@ class _AddPersonState extends State<AddPerson> {
   );
 
   final snackbarGood = const SnackBar(
-    content: Text('Person er Oprettet'),
+    content: Text('Person er oprettet'),
     backgroundColor: Colors.green,
   );
 
