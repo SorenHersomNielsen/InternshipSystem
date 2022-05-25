@@ -6,11 +6,12 @@ import 'package:http/http.dart' as http;
 class Viewmodel {
   final networkMethod =  NetworkMethod();
 
-  Future<Person?> login(String email, String password) {
-    return networkMethod.fetchPerson(email, password);
+  Future<Person?> login(String email, String password) async {
+    return await networkMethod.fetchPerson(email, password);
   }
 
   Future<Person> getPersonData(String email, String password){
+
     return networkMethod.getPersonData(email, password);
   }
 
@@ -41,6 +42,10 @@ class Viewmodel {
 
   Future<List<Activity>> getActivityData(String Role, int Id){
     return networkMethod.getActivityData(Role, Id);
+  }
+
+  Future<Activity> createActivity(String headline, DateTime date){
+    return networkMethod.createActivity(headline, date);
   }
 
 }

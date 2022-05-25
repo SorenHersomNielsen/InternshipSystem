@@ -107,7 +107,27 @@ class NetworkMethod {
     if (response.statusCode == 201) {
       return Person.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to create person.');
+      throw Exception('Failed to create person');
+    }
+  }
+
+  Future<Activity> createActivity(String headline, DateTime date) async{
+
+    final response = await http.post(Uri.parse('http://localhost:5000/api/Activities'),
+    headers: <String, String>{
+    'Content-Type': 'application/json',
+    },
+
+    body: jsonEncode(<String, String>{
+      'headline': headline,
+       'date': date.toIso8601String()
+    }),
+    );
+
+    if(response.statusCode == 201){
+      return Activity.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to create activity');
     }
   }
 }

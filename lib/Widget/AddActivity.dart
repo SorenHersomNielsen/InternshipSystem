@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:internship/Viewmodel.dart';
+import 'package:intl/intl.dart';
 
 class AddActivity extends StatefulWidget {
   const AddActivity({Key? key, required this.restorationId}) : super(key: key);
@@ -12,14 +14,49 @@ class AddActivity extends StatefulWidget {
 class _AddActivityState extends State<AddActivity> with RestorationMixin {
   final _formKey = GlobalKey<FormState>();
   late String _Headline;
-  late String _Hour;
-  late String _min;
+  late int _Hour;
+  late int _min;
+  late int day;
+  late int month;
+  late int year;
+  String activityDay = 'Vælg dag';
+
+  final viewmodel = Viewmodel();
+
+  String? _selectedTime = 'Vælg tide';
+
+  Future<void> _show() async {
+    final TimeOfDay? result =
+     await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (context, childWidget) {
+          return MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                // Using 24-Hour format
+                  alwaysUse24HourFormat: true),
+
+              // If you want 12-Hour format, just change alwaysUse24HourFormat to false or remove all the builder argument
+              child: childWidget!);
+        });
+    setState(() {
+      if(result != null){
+        final String hour = result.hour.toString();
+        final String min = result.minute.toString();
+
+        _selectedTime = '$hour:$min';
+        _Hour = result.hour;
+        _min = result.minute;
+      }
+    });
+  }
+
 
   @override
   String? get restorationId => widget.restorationId;
 
   final RestorableDateTime _selectedDate =
-      RestorableDateTime(DateTime(2021, 7, 25));
+      RestorableDateTime(DateTime.now());
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
       RestorableRouteFuture<DateTime?>(
     onComplete: _selectDate,
@@ -42,7 +79,7 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
           restorationId: 'date_picker_dialog',
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2021),
+          firstDate: DateTime(2022),
           lastDate: DateTime(2050),
         );
       },
@@ -60,10 +97,11 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
     if (newSelectedDate != null) {
       setState(() {
         _selectedDate.value = newSelectedDate;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-              'Selected: ${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}'),
-        ));
+        day = _selectedDate.value.day;
+        month = _selectedDate.value.month;
+        year = _selectedDate.value.year;
+
+        activityDay = '$day:$month:$year';
       });
     }
   }
@@ -74,7 +112,7 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
   );
 
   final snackbarGood = const SnackBar(
-    content: Text('aktiviteten er Oprettet'),
+    content: Text('Aktiviteten er oprettet'),
     backgroundColor: Colors.green,
   );
 
@@ -104,37 +142,45 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                     onPressed: () {
                       _restorableDatePickerRouteFuture.present();
                     },
-                    child: const Text('Open Date Picker'),
+                    child: Text('$activityDay'),
                   ),
                   const SizedBox(height: 10),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Timer'),
-                    onChanged: (value) {
-                      _Hour = value;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'være venlig at skrive Timer';
+                  ElevatedButton(
+                    onPressed: _show,
+                    child: Text('$_selectedTime'),
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.red),
+                    child: const Text(
+                      'Oprettet Aktivitet',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+
+                        final DateTime todatetime = DateTime(year,month,day, _Hour, _min );
+                        print(todatetime);
+
+                        viewmodel.createActivity(_Headline, todatetime)
+                            .then((value) => {
+
+                          if (value != null)
+                            {
+                             ScaffoldMessenger.of(context).showSnackBar(snackbarGood)
+                            }
+                          else
+                            {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbarFail)
+                            }
+                        });
                       }
-                      return null;
+                      ;
                     },
                   ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Timer'),
-                    onChanged: (value) {
-                      _min = value;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'være venlig at skrive Timer';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 10),
                 ]))));
   }
 }
