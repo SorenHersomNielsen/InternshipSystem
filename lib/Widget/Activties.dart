@@ -3,6 +3,7 @@ import 'package:internship/Model/Activty.dart';
 import 'package:intl/intl.dart';
 import 'package:internship/Pages/AddActivityPage.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/Pages/SeeActivityPage.dart';
 
 class Activtes extends StatefulWidget {
   Activtes(
@@ -51,7 +52,18 @@ class _ActivteState extends State<Activtes> {
                     itemCount: activity.length,
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SeeActivityPage(
+                                  role: widget.role,
+                                  id: widget.id,
+                                  email: widget.email,
+                                  password: widget.password,
+                                )),
+                          );
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(
                               top: 5.0, bottom: 5.0, right: 20.0),
