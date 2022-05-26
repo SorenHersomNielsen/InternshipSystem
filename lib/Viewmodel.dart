@@ -1,6 +1,7 @@
 import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
+import 'package:internship/Model/ActivityStatus.dart';
 import 'package:http/http.dart' as http;
 
 class Viewmodel {
@@ -51,4 +52,13 @@ class Viewmodel {
   Future<Person> changePerson( int id, String mail, String name, String password, String telephonenumber, String internship, String school, String role){
     return networkMethod.changePerson(id, mail, name, password, telephonenumber, internship, school, role);
   }
+
+  Future<ActivityStatus> getOneActivity(int activityid, int personid){
+    return networkMethod.getactivity(activityid, personid);
+  }
+
+  Future<ActivityStatus> changeAnswer(int id, int personid, String answer){
+    return networkMethod.changeAnswer(id, personid, answer);
+  }
+
 }

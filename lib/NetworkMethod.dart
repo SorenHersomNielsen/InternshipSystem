@@ -1,8 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
+import 'package:internship/Model/ActivityStatus.dart';
 import 'dart:async';
 import 'dart:convert';
+
 
 class NetworkMethod {
 
@@ -17,7 +19,7 @@ class NetworkMethod {
     }
   }
 
-   Future<Person> getPersonData(String email, String password) async {
+  Future<Person> getPersonData(String email, String password) async {
     final response = await http.get(Uri.parse(
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
@@ -158,4 +160,24 @@ class NetworkMethod {
 
     }
   }
+
+  Future<ActivityStatus> getactivity (int activityId, int personid) async{
+    final response = await http.get(Uri.parse('http://localhost:5000/api/ActivityStatuses/StatusActivityWithThatActivityAndPerson?activityId=$activityId&personId=$personid'));
+
+    if(response.statusCode == 200 ){
+      return ActivityStatus.fromJson(jsonDecode(response.body));
+    } else{
+      throw Exception('fail');
+    }
+  }
+  
+  Future<ActivityStatus> changeAnswer(int id, int personid, String answer) async{
+    final response = await http.put(Uri.parse('http://localhost:5000/api/ActivityStatuses/$id?personId=$personid&stringToChangeTo=$answer'));
+
+    if(response.statusCode == 200){
+      return ActivityStatus.fromJson(jsonDecode(response.body));
+    }
+    throw Exception('fail');
+  }
+  
 }
