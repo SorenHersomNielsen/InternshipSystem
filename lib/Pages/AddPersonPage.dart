@@ -3,6 +3,7 @@ import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/ActivtiesPage.dart';
 import 'package:internship/Pages/PersonsPage.dart';
 import 'package:internship/Widget/AddPerson.dart';
+import 'package:internship/Pages/GroupsPage.dart';
 
 class AddPersonPage extends StatefulWidget {
   const AddPersonPage(
@@ -49,7 +50,7 @@ class _AddPersonPageState extends State<AddPersonPage> {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text('Drawer Header'),
+                child: Text(''),
               ),
               ListTile(
                 title: const Text(
@@ -100,6 +101,26 @@ class _AddPersonPageState extends State<AddPersonPage> {
                           builder: (context) => PersonsPage(
                               Role: widget.role,
                               Id: widget.id,
+                              email: widget.email,
+                              password: widget.password)),
+                    );
+                  },
+                ),
+              ),
+              Visibility(
+                visible: seepersonspage,
+                child: ListTile(
+                  title: const Text(
+                    'Grupper',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => GroupsPage(
+                              Id: widget.id,
+                              Role: widget.role,
                               email: widget.email,
                               password: widget.password)),
                     );

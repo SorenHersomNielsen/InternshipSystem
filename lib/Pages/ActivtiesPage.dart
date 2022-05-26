@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Widget/Activties.dart';
 import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/PersonsPage.dart';
+import 'package:internship/Pages/GroupsPage.dart';
 
 class ActivtesPage extends StatefulWidget {
   const ActivtesPage(
@@ -48,7 +49,7 @@ class _ActivtesPageState extends State<ActivtesPage> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Drawer Header'),
+              child: Text(''),
             ),
             ListTile(
               title: const Text(
@@ -87,6 +88,26 @@ class _ActivtesPageState extends State<ActivtesPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => PersonsPage(
+                            Id: widget.id,
+                            Role: widget.role,
+                            email: widget.email,
+                            password: widget.password)),
+                  );
+                },
+              ),
+            ),
+            Visibility(
+              visible: seepersonspage,
+              child: ListTile(
+                title: const Text(
+                  'Grupper',
+                  style: TextStyle(color: Colors.black),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GroupsPage(
                             Id: widget.id,
                             Role: widget.role,
                             email: widget.email,

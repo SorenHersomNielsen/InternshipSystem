@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text('Drawer Header'),
+                child: Text(''),
               ),
               ListTile(
                 title: const Text(
