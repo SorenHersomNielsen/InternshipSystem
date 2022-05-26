@@ -60,7 +60,7 @@ class _SeeActivityState extends State<SeeActivity> {
                             children: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
-                                  final String comming = 'I am attending';
+                                  const String comming = 'I am attending';
                                   viewmodel.changeAnswer(id, widget.userId, comming);
                                 },
                                 child: const Text(
@@ -74,7 +74,7 @@ class _SeeActivityState extends State<SeeActivity> {
                               const SizedBox(width: 5),
                               ElevatedButton(
                                 onPressed: () {
-                                  final String iamnotcooming = 'I am not attending';
+                                  const String iamnotcooming = 'I am not attending';
                                   viewmodel.changeAnswer(id, widget.userId, iamnotcooming);
                                 },
                                 child: const Text(
@@ -88,7 +88,7 @@ class _SeeActivityState extends State<SeeActivity> {
                               const SizedBox(width: 5),
                               ElevatedButton(
                                 onPressed: () {
-                                  final String idontknow = 'I have not answered';
+                                  const String idontknow = 'I have not answered';
                                   viewmodel.changeAnswer(id, widget.userId, idontknow);
                                 },
                                 child: const Text(

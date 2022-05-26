@@ -94,7 +94,17 @@ class _PersonsPageState extends State<EditPersonsPage> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PersonsPage(
+                              Role: widget.Role,
+                              Id: widget.Id,
+                              email: widget.email,
+                              password: widget.password)),
+                    );
+                  },
                 ),
               ),
               Visibility(

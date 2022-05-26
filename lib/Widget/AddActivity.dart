@@ -175,8 +175,7 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                                   .showSnackBar(snackbarFail)
                             }
                         });
-                      }
-                      ;
+                      };
                     },
                   ),
                 ]))));

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Model/Person.dart';
-import 'package:internship/Pages/AddPersonPage.dart';
 import 'package:internship/Viewmodel.dart';
-import 'package:internship/Pages/EditPersonPage.dart';
 import 'package:internship/Model/Group.dart';
 
 class Groups extends StatefulWidget {
@@ -25,7 +22,6 @@ class Groups extends StatefulWidget {
 
 class _GroupsState extends State<Groups> {
   late Future<List<Group>> futureGroups;
-  final _formKey = GlobalKey<FormState>();
 
   final viewmodel =  Viewmodel();
   late String name;
@@ -166,7 +162,6 @@ class _GroupsState extends State<Groups> {
                 TextButton(
                   onPressed: () => {
                       viewmodel.createGroup(name).then((value) => {
-                        print(value),
                         if(value != null){
                           Navigator.pop(context, 'OK'),
                           ScaffoldMessenger.of(context)
