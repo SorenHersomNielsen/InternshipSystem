@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:internship/Widget/Profile.dart';
 import 'package:internship/Pages/ActivtiesPage.dart';
 import 'package:internship/Pages/PersonsPage.dart';
+import 'package:internship/Pages/GroupsPage.dart';
 
 class ProfilePage extends StatefulWidget {
   final String email;
@@ -86,7 +87,27 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PersonsPage(
+                          builder: (context) => GroupsPage(
+                              Id: widget.Id,
+                              Role: widget.Role,
+                              email: widget.email,
+                              password: widget.password)),
+                    );
+                  },
+                ),
+              ),
+              Visibility(
+                visible: seepersonspage,
+                child: ListTile(
+                  title: const Text(
+                    'Grupper',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => GroupsPage(
                               Id: widget.Id,
                               Role: widget.Role,
                               email: widget.email,

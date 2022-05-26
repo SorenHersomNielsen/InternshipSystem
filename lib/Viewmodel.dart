@@ -2,6 +2,7 @@ import 'package:internship/NetworkMethod.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/Model/ActivityStatus.dart';
+import 'package:internship/Model/Group.dart';
 import 'package:http/http.dart' as http;
 
 class Viewmodel {
@@ -59,6 +60,18 @@ class Viewmodel {
 
   Future<ActivityStatus> changeAnswer(int id, int personid, String answer){
     return networkMethod.changeAnswer(id, personid, answer);
+  }
+
+  Future<List<Group>> getAllGroups(){
+    return networkMethod.getAllGroups();
+  }
+
+  Future<http.Response> deleteGroup(int id){
+    return networkMethod.deleteGroup(id);
+  }
+
+  Future<Group> createGroup(String name){
+    return networkMethod.createGroup(name);
   }
 
 }

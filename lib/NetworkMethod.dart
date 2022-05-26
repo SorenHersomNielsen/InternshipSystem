@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/Model/ActivityStatus.dart';
+import 'package:internship/Model/Group.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -179,5 +180,42 @@ class NetworkMethod {
     }
     throw Exception('fail');
   }
-  
+
+  Future<List<Group>> getAllGroups() async {
+    final response = await http.get(Uri.parse('http://localhost:5000/api/Groups'));
+
+    if(response.statusCode == 200) {
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((group) => Group.fromJson(group)).toList();
+    }else{
+      throw Exception('fail');
+    }
+  }
+
+  Future<http.Response> deleteGroup(int id) async {
+    final response = await http.delete(Uri.parse('http://localhost:5000/api/Groups/$id'));
+
+    return response;
+  }
+
+  Future<Group> createGroup(String name) async {
+    final response = await http.post(Uri.parse('http://localhost:5000/api/Groups'),
+    headers: <String, String>{
+      'Content-Type': 'application/json'
+    },
+
+    body: jsonEncode(<String, String>{
+    'name': name,
+    }),
+    );
+
+        if(response.statusCode == 201){
+          return Group.fromJson(jsonDecode(response.body));
+        }
+        else {
+          throw Exception('fail');
+        }
+  }
+
+
 }
