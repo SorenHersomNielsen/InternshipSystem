@@ -3,6 +3,7 @@ import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Group.dart';
+import 'package:internship/Model/GroupOfPeople.dart';
 import 'package:http/http.dart' as http;
 
 class Viewmodel {
@@ -72,6 +73,10 @@ class Viewmodel {
 
   Future<Group> createGroup(String name){
     return networkMethod.createGroup(name);
+  }
+
+  Future<GroupOfPeople> addGroupOfPeople(int groupId, int personId){
+    return networkMethod.addGroupOfPeople(groupId, personId);
   }
 
 }

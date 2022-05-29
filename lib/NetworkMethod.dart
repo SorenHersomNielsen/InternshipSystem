@@ -3,6 +3,7 @@ import 'package:internship/Model/Person.dart';
 import 'package:internship/Model/Activty.dart';
 import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Group.dart';
+import 'package:internship/Model/GroupOfPeople.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -215,6 +216,16 @@ class NetworkMethod {
         else {
           throw Exception('fail');
         }
+  }
+
+  Future<GroupOfPeople> addGroupOfPeople(int groupId, int personId) async{
+    final response = await http.post(Uri.parse('http://localhost:5000/api/GroupsOfPeople?groupId=$groupId&personId=$personId'));
+
+    if(response.statusCode == 201) {
+      return GroupOfPeople.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('fail');
+    }
   }
 
 

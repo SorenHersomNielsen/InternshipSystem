@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/Group.dart';
+import 'package:internship/Pages/AddPeopleToGroupPage.dart';
 
 class Groups extends StatefulWidget {
   const Groups(
       {Key? key,
-        required this.id,
-        required this.role,
-        required this.email,
-        required this.password})
+      required this.id,
+      required this.role,
+      required this.email,
+      required this.password})
       : super(key: key);
 
   final String email;
@@ -23,7 +24,7 @@ class Groups extends StatefulWidget {
 class _GroupsState extends State<Groups> {
   late Future<List<Group>> futureGroups;
 
-  final viewmodel =  Viewmodel();
+  final viewmodel = Viewmodel();
   late String name;
 
   final snackbarFail = const SnackBar(
@@ -93,33 +94,33 @@ class _GroupsState extends State<Groups> {
                               children: <Widget>[
                                 Wrap(
                                   children: <Widget>[
-
                                     RawMaterialButton(
                                       child: const Icon(Icons.delete),
                                       padding: const EdgeInsets.all(15.0),
                                       shape: const CircleBorder(),
                                       onPressed: () {
-                                        viewmodel.deleteGroup(groups[index].Id).then((value) => {
-                                          if (value.statusCode == 200)
-                                            {
-                                              setState(() {
-                                                futureGroups =
-                                                    viewmodel.getAllGroups();
-                                              })
-                                            }
-                                          else
-                                            {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                  snackbarFail)
-                                            }
-                                        });
+                                        viewmodel
+                                            .deleteGroup(groups[index].Id)
+                                            .then((value) => {
+                                                  if (value.statusCode == 200)
+                                                    {
+                                                      setState(() {
+                                                        futureGroups = viewmodel
+                                                            .getAllGroups();
+                                                      })
+                                                    }
+                                                  else
+                                                    {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              snackbarFail)
+                                                    }
+                                                });
                                       },
                                     )
-
                                   ],
                                 )
-
                               ],
                             )
                           ],
@@ -161,23 +162,29 @@ class _GroupsState extends State<Groups> {
                 ),
                 TextButton(
                   onPressed: () => {
-                      viewmodel.createGroup(name).then((value) => {
-                        if(value != null){
-                          Navigator.pop(context, 'OK'),
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(
-                              snackbarGood),
-                          setState((){
-                            futureGroups = viewmodel.getAllGroups();
-                          })
-                        } else{
-                          Navigator.pop(context, 'OK'),
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(
-                              snackbarFail)
-                        }
-                      })
-                     },
+                    viewmodel.createGroup(name).then((value) => {
+                          if (value != null)
+                            {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddPeopleToGroupPage(
+                                          email: widget.email,
+                                          password: widget.password,
+                                          Role: widget.role,
+                                          userId: widget.id,
+                                          groupID: value.Id,
+                                        )),
+                              )
+                            }
+                          else
+                            {
+                              Navigator.pop(context, 'OK'),
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbarFail)
+                            }
+                        })
+                  },
                   child: const Text('OK'),
                 ),
               ],
