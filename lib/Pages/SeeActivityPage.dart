@@ -3,6 +3,7 @@ import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/PersonsPage.dart';
 import 'package:internship/Widget/SeeActivity.dart';
 import 'package:internship/Pages/GroupsPage.dart';
+import 'package:internship/Pages/ActivtiesPage.dart';
 
 class SeeActivityPage extends StatefulWidget {
   const SeeActivityPage(
@@ -81,7 +82,17 @@ class _SeeActivityPageState extends State<SeeActivityPage> {
                 style:
                 TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ActivtesPage(
+                          role: widget.role,
+                          id: widget.id,
+                          email: widget.email,
+                          password: widget.password)),
+                );
+              },
             ),
             Visibility(
               visible: seepersonspage,
