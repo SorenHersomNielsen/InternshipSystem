@@ -4,26 +4,29 @@ import 'package:internship/Pages/PersonsPage.dart';
 import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/ActivtiesPage.dart';
 import 'package:internship/Pages/GroupsPage.dart';
+import 'package:internship/Widget/AddGroupToActivity.dart';
 
-class AddActivityPage extends StatefulWidget {
-  AddActivityPage(
+class AddGroupToActivityPage extends StatefulWidget {
+  AddGroupToActivityPage(
       {Key? key,
-      required this.role,
-      required this.id,
-      required this.email,
-      required this.password})
+        required this.role,
+        required this.id,
+        required this.email,
+        required this.password,
+      required this.activityId})
       : super(key: key);
 
   final String email;
   final String password;
   final String role;
   final int id;
+  final int activityId;
 
   @override
-  _AddActivityPageState createState() => _AddActivityPageState();
+  _AddGroupToActivityPage createState() => _AddGroupToActivityPage();
 }
 
-class _AddActivityPageState extends State<AddActivityPage> {
+class _AddGroupToActivityPage extends State<AddGroupToActivityPage> {
   bool seepersonspage = false;
 
   @override
@@ -129,12 +132,7 @@ class _AddActivityPageState extends State<AddActivityPage> {
             ],
           ),
         ),
-        body:  AddActivity(
-          restorationId: 'main',
-          email: widget.email,
-          id: widget.id,
-          password: widget.password,
-          role: widget.role
-        ));
+      body: addGroupToActivity(activityId: widget.activityId, email: widget.email, password: widget.password, role: widget.role, id: widget.id),
+    );
   }
 }

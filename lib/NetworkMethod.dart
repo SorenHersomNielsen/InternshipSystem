@@ -4,6 +4,7 @@ import 'package:internship/Model/Activty.dart';
 import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Group.dart';
 import 'package:internship/Model/GroupOfPeople.dart';
+import 'package:internship/Model/ActivityAndGroupsOfPeople.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -227,6 +228,20 @@ class NetworkMethod {
       throw Exception('fail');
     }
   }
+
+Future <List<ActivityAndGroupsOfPeople>> PostActivityAndGroupsOfPeople(int activityId, int groupId) async {
+    print(activityId);
+    print(groupId);
+    final response = await http.post(Uri.parse('http://localhost:5000/api/ActivityAndGroupsOfPeople?activityId=$activityId&groupId=$groupId'));
+
+    if(response.statusCode == 201) {
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((activityAndGroupsOfPeople) => ActivityAndGroupsOfPeople.fromJson(activityAndGroupsOfPeople)).toList();
+      print(response.body);
+    } else{
+      throw Exception('fail');
+    }
+}
 
 
 }

@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/Pages/AddGroupToActivityPage.dart';
 
 class AddActivity extends StatefulWidget {
-  const AddActivity({Key? key, required this.restorationId}) : super(key: key);
+  const AddActivity(
+      {Key? key,
+      required this.restorationId,
+      required this.email,
+      required this.password,
+      required this.role,
+      required this.id})
+      : super(key: key);
 
   final String? restorationId;
+  final String email;
+  final String password;
+  final String role;
+  final int id;
 
   @override
   _AddActivityState createState() => _AddActivityState();
@@ -25,21 +37,20 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
   String? _selectedTime = 'Vælg tide';
 
   Future<void> _show() async {
-    final TimeOfDay? result =
-     await showTimePicker(
+    final TimeOfDay? result = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.now(),
         builder: (context, childWidget) {
           return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                // Using 24-Hour format
+                  // Using 24-Hour format
                   alwaysUse24HourFormat: true),
 
               // If you want 12-Hour format, just change alwaysUse24HourFormat to false or remove all the builder argument
               child: childWidget!);
         });
     setState(() {
-      if(result != null){
+      if (result != null) {
         final String hour = result.hour.toString();
         final String min = result.minute.toString();
 
@@ -50,12 +61,10 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
     });
   }
 
-
   @override
   String? get restorationId => widget.restorationId;
 
-  final RestorableDateTime _selectedDate =
-      RestorableDateTime(DateTime.now());
+  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
       RestorableRouteFuture<DateTime?>(
     onComplete: _selectDate,
@@ -159,23 +168,37 @@ class _AddActivityState extends State<AddActivity> with RestorationMixin {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        final DateTime todatetime =
+                            DateTime(year, month, day, _Hour, _min);
 
-                        final DateTime todatetime = DateTime(year,month,day, _Hour, _min );
-
-                        viewmodel.createActivity(_Headline, todatetime)
+                        viewmodel
+                            .createActivity(_Headline, todatetime)
                             .then((value) => {
-
-                          if (value != null)
-                            {
-                             ScaffoldMessenger.of(context).showSnackBar(snackbarGood)
-                            }
-                          else
-                            {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbarFail)
-                            }
-                        });
-                      };
+                                  if (value != null)
+                                    {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackbarGood),
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddGroupToActivityPage(
+                                                    id: widget.id,
+                                                    role: widget.role,
+                                                    email: widget.email,
+                                                    password: widget.password,
+                                                    activityId: value.Id
+                                                )),
+                                      ),
+                                    }
+                                  else
+                                    {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackbarFail)
+                                    }
+                                });
+                      }
+                      ;
                     },
                   ),
                 ]))));
