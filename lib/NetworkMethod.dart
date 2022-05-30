@@ -5,6 +5,7 @@ import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Group.dart';
 import 'package:internship/Model/GroupOfPeople.dart';
 import 'package:internship/Model/ActivityAndGroupsOfPeople.dart';
+import 'package:internship/Model/Status.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -170,7 +171,7 @@ class NetworkMethod {
     if(response.statusCode == 200 ){
       return ActivityStatus.fromJson(jsonDecode(response.body));
     } else{
-      throw Exception('fail');
+      throw Exception('getactivity');
     }
   }
   
@@ -180,7 +181,7 @@ class NetworkMethod {
     if(response.statusCode == 200){
       return ActivityStatus.fromJson(jsonDecode(response.body));
     }
-    throw Exception('fail');
+    throw Exception('changeAnswer');
   }
 
   Future<List<Group>> getAllGroups() async {
@@ -190,7 +191,7 @@ class NetworkMethod {
       List jsonresponse = jsonDecode(response.body);
       return jsonresponse.map((group) => Group.fromJson(group)).toList();
     }else{
-      throw Exception('fail');
+      throw Exception('getAllGroups');
     }
   }
 
@@ -215,7 +216,7 @@ class NetworkMethod {
           return Group.fromJson(jsonDecode(response.body));
         }
         else {
-          throw Exception('fail');
+          throw Exception('createGroup');
         }
   }
 
@@ -225,13 +226,12 @@ class NetworkMethod {
     if(response.statusCode == 201) {
       return GroupOfPeople.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('fail');
+      throw Exception('addGroupOfPeople');
     }
   }
 
 Future <List<ActivityAndGroupsOfPeople>> PostActivityAndGroupsOfPeople(int activityId, int groupId) async {
-    print(activityId);
-    print(groupId);
+
     final response = await http.post(Uri.parse('http://localhost:5000/api/ActivityAndGroupsOfPeople?activityId=$activityId&groupId=$groupId'));
 
     if(response.statusCode == 201) {
@@ -239,9 +239,62 @@ Future <List<ActivityAndGroupsOfPeople>> PostActivityAndGroupsOfPeople(int activ
       return jsonresponse.map((activityAndGroupsOfPeople) => ActivityAndGroupsOfPeople.fromJson(activityAndGroupsOfPeople)).toList();
       print(response.body);
     } else{
+      throw Exception('PostActivityAndGroupsOfPeople');
+    }
+}
+
+Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId) async {
+    final response = await http.get(Uri.parse('http://localhost:5000/api/ActivityStatuses/Activities?activityId=$activityId'));
+
+    if(response.statusCode == 200){
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((getactivityStatusByActivity) => ActivityStatus.fromJson(getactivityStatusByActivity)).toList();
+    } else{
+      throw Exception('getActivityStatusByActivity');
+    }
+}
+
+Future<Status> getStatusById(int id) async{
+    final response = await http.get(Uri.parse('http://localhost:5000/api/Statuses/$id'));
+
+    if(response.statusCode == 200){
+      return Status.fromJson(jsonDecode(response.body));
+    } else{
+      throw Exception('getStatusById');
+    }
+}
+
+Future<Person> getPersonById(int id) async {
+    final response = await http.get(Uri.parse('http://localhost:5000/api/Persons/$id'));
+
+    if(response.statusCode == 200) {
+      return Person.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('getPersonById');
+    }
+}
+
+Future<List<GroupOfPeople>> getByGroupId(int groupId) async {
+    final response = await http.get(Uri.parse('http://localhost:5000/api/GroupsOfPeople/Groups?groupId=$groupId'));
+
+    if(response.statusCode == 200){
+      List jsonresponse = jsonDecode(response.body);
+      return jsonresponse.map((getbygroupid) => GroupOfPeople.fromJson(getbygroupid)).toList();
+    } else{
       throw Exception('fail');
     }
 }
+
+Future<ActivityStatus> postPersonToActivity(int activityId, int personId)async {
+    final response = await http.post(Uri.parse('http://localhost:5000/api/ActivityStatuses?activityId=$activityId&personId=$personId'));
+
+    if(response.statusCode == 201){
+      return ActivityStatus.fromJson(jsonDecode(response.body));
+    } else{
+      throw Exception('fail');
+    }
+}
+
 
 
 }

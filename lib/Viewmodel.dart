@@ -5,6 +5,7 @@ import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Group.dart';
 import 'package:internship/Model/GroupOfPeople.dart';
 import 'package:internship/Model/ActivityAndGroupsOfPeople.dart';
+import 'package:internship/Model/Status.dart';
 import 'package:http/http.dart' as http;
 
 class Viewmodel {
@@ -84,5 +85,24 @@ class Viewmodel {
     return networkMethod.PostActivityAndGroupsOfPeople(activityId, groupId);
   }
 
+  Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId){
+    return networkMethod.getActivityStatusByActivity(activityId);
+  }
+
+  Future<Status> getStatusById(int id) {
+    return networkMethod.getStatusById(id);
+  }
+
+  Future<Person> getPersonById (int id){
+    return networkMethod.getPersonById(id);
+  }
+
+  Future<List<GroupOfPeople>> getByGroupId(int groupId){
+    return networkMethod.getByGroupId(groupId);
+  }
+
+  Future<ActivityStatus> postPersonToActivity(int activityId, int personId){
+    return networkMethod.postPersonToActivity(activityId, personId);
+  }
 
 }

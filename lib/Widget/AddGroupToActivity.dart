@@ -6,11 +6,12 @@ import 'package:internship/Pages/ActivtiesPage.dart';
 
 class addGroupToActivity extends StatefulWidget {
   const addGroupToActivity(
-      {Key? key, required this.activityId,
-        required this.role,
-        required this.id,
-        required this.email,
-        required this.password})
+      {Key? key,
+      required this.activityId,
+      required this.role,
+      required this.id,
+      required this.email,
+      required this.password})
       : super(key: key);
 
   final int activityId;
@@ -28,6 +29,8 @@ class _addGroupToActivityState extends State<addGroupToActivity> {
 
   final viewmodel = Viewmodel();
 
+  var personId = [];
+
   final snackbarFail = const SnackBar(
     content: Text('noget gik galt, prøve igen :('),
     backgroundColor: Colors.red,
@@ -37,8 +40,6 @@ class _addGroupToActivityState extends State<addGroupToActivity> {
     content: Text('Gruppen er tilføjet til aktiviteten'),
     backgroundColor: Colors.green,
   );
-
-
 
   @override
   void initState() {
@@ -103,28 +104,47 @@ class _addGroupToActivityState extends State<addGroupToActivity> {
                                       padding: const EdgeInsets.all(15.0),
                                       shape: const CircleBorder(),
                                       onPressed: () {
-                                        viewmodel.PostActivityAndGroupsOfPeople(widget.activityId, groups[index].Id).then((value) => {
-                                          print('test'),
+                                        viewmodel.PostActivityAndGroupsOfPeople(
+                                                widget.activityId,
+                                                groups[index].Id)
+                                            .then((value) => {
+                                                  if (value != null)
+                                                    {
 
-                                          if(value != null) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackbarGood),
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ActivtesPage(
-                                                          id: widget.id,
-                                                          role: widget.role,
-                                                          email: widget.email,
-                                                          password: widget.password
-                                                      )),
-                                            ),
+                                                      viewmodel.getByGroupId(groups[index].Id).then((value) => {
+                                                        
+                                                       value.forEach((element) {
+                                                         personId.add(element.personId);
+                                                       }),
 
-                                          }
+                                                        for(int id in personId){
+                                                          viewmodel.postPersonToActivity(widget.activityId, id),
+                                                        },
 
-                                        });
+                                                      }),
 
+
+
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              snackbarGood),
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ActivtesPage(
+                                                                    id: widget
+                                                                        .id,
+                                                                    role: widget
+                                                                        .role,
+                                                                    email: widget
+                                                                        .email,
+                                                                    password: widget
+                                                                        .password)),
+                                                      ),
+                                                    }
+                                                });
                                       },
                                     )
                                   ],

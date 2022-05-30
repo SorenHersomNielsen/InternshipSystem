@@ -127,7 +127,7 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroupPage> {
             ],
           ),
         ),
-      body: AddPeopleToGroup(groupId: widget.groupID),
+      body: AddPeopleToGroup(groupId: widget.groupID, userId: widget.userId, password: widget.password, role: widget.Role, email: widget.email),
 );
   }
 }

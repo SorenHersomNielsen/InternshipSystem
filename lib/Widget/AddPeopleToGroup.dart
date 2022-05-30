@@ -3,11 +3,16 @@ import 'package:internship/Model/Person.dart';
 import 'package:internship/Pages/AddPersonPage.dart';
 import 'package:internship/Viewmodel.dart';
 import 'package:internship/Pages/EditPersonPage.dart';
+import 'package:internship/Pages/GroupsPage.dart';
 
 class AddPeopleToGroup extends StatefulWidget {
-  AddPeopleToGroup({Key? key, required this.groupId}) : super(key: key);
+  AddPeopleToGroup({Key? key, required this.groupId, required this.role, required this.password, required this.email, required this.userId}) : super(key: key);
 
   final int groupId;
+  final int userId;
+  final String password;
+  final String email;
+  final String role;
 
   @override
   _AddPeopleToGroupState createState() => _AddPeopleToGroupState();
@@ -24,6 +29,10 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
     content: Text('noget gik galt, prøve igen :('),
     backgroundColor: Colors.red,
   );
+  final snackbarGood = const SnackBar(
+    content: Text('personerne er tilføjet til gruppen'),
+    backgroundColor: Colors.green,
+  );
 
   @override
   void initState() {
@@ -36,8 +45,7 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Expanded(
-          child: Stack(
+        child: Stack(
             children: [
               FutureBuilder<List<Person>>(
                 future: futureActivity,
@@ -66,6 +74,8 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
+                              Expanded(
+                                child:
                                   Row(
                                     children: <Widget>[
                                       Column(
@@ -100,6 +110,7 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
                                       ),
                                     ],
                                   ),
+                          ),
                                   Column(
                                     children: <Widget>[
                                       Wrap(
@@ -152,7 +163,18 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
                         onPressed: () {
                           for(var id in listofid){
                             viewmodel.addGroupOfPeople(widget.groupId, id);
-                          }
+                          };
+                          ScaffoldMessenger.of(context).showSnackBar(snackbarGood);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => GroupsPage(
+                                    Id: widget.userId,
+                                    Role: widget.role,
+                                    email: widget.email,
+                                    password: widget.password)),
+                          );
                         },
                       ),
                       const SizedBox(width: 10),
@@ -178,7 +200,6 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
                   ))
             ],
           ),
-        ),
       ),
     );
   }
