@@ -105,6 +105,13 @@ class _SeeActivityState extends State<SeeActivity> {
                                 const String comming = 'I am attending';
                                 viewmodel.changeAnswer(
                                     id, widget.userId, comming);
+                                setState((){
+                                  statusId.clear();
+                                  status.clear();
+                                  personId.clear();
+                                  name.clear();
+                                  _SeeActivityState();
+                                });
                               },
                               child: const Text(
                                 'Tilmeld',
@@ -123,6 +130,13 @@ class _SeeActivityState extends State<SeeActivity> {
                                     'I am not attending';
                                 viewmodel.changeAnswer(
                                     id, widget.userId, iamnotcooming);
+                                setState((){
+                                  statusId.clear();
+                                  status.clear();
+                                  personId.clear();
+                                  name.clear();
+                                  _SeeActivityState();
+                                });
                               },
                               child: const Text(
                                 'Frameld',
@@ -140,6 +154,13 @@ class _SeeActivityState extends State<SeeActivity> {
                                 const String idontknow = 'I have not answered';
                                 viewmodel.changeAnswer(
                                     id, widget.userId, idontknow);
+                                setState((){
+                                  statusId.clear();
+                                  status.clear();
+                                  personId.clear();
+                                  name.clear();
+                                  _SeeActivityState();
+                                });
                               },
                               child: const Text(
                                 'Ved ikke',
