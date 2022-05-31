@@ -28,137 +28,163 @@ class _SeeActivityState extends State<SeeActivity> {
   late Future<ActivityStatus> futureActivityStatus;
   late int id;
   var statusId = [];
-  var personId = [];
+  List<int> personId = <int>[];
   var status = [];
   List<Person> name = <Person>[];
 
-  getStatusById(){
-    for (int id in statusId) {
-      viewmodel.getStatusById(id).then((value) =>
-      {
-        personId.add(value.personId),
-        status.add(value.myStatus),
-        print(value)
-      });
-  };
+  getStatusById() async {
+    for (var id in statusId) {
+      await viewmodel.getStatusById(id).then((value) => {
+            personId.add(value.personId),
+            status.add(value.myStatus),
+          });
+    }
+    ;
   }
 
-  getPersonById() {
-    print('detet');
+  getPersonById() async {
     for (var id in personId) {
-      print('asdasd');
-      viewmodel.getPersonById(id).then((value) => {
-
-        name.add(value),
-        print(value.Id)
-      });
-    };
+      await viewmodel.getPersonById(id).then((value) => {
+            name.add(value),
+          });
+    }
+    ;
   }
 
   tryToReload() async {
-     futureActivityStatus =  viewmodel.getOneActivity(widget.ActivityId, widget.userId);
+    //futureActivityStatus =  viewmodel.getOneActivity(widget.ActivityId, widget.userId);
 
-     await viewmodel.getOneActivity(widget.ActivityId, widget.userId).then((value) {
-
+    await viewmodel
+        .getOneActivity(widget.ActivityId, widget.userId)
+        .then((value) {
       id = value.Id;
     });
 
-     viewmodel.getActivityStatusByActivity(widget.ActivityId).then((value) => {
-      value.forEach((element) {
-        print(element);
-        statusId.add(element.statusId);
-        getStatusById();
-        getPersonById();
-      }),
+    await viewmodel
+        .getActivityStatusByActivity(widget.ActivityId)
+        .then((value) => {
+              value.forEach((element) {
+                statusId.add(element.statusId);
+              }),
+            });
 
-
-
-    });
-
-  }
-
-  @override
-   void initState() {
-    super.initState();
-
-    tryToReload();
+    await getStatusById();
+    await getPersonById();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                widget.headline,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                widget.date,
-                style: const TextStyle(),
-                textAlign: TextAlign.left,
-              ),
-              const SizedBox(height: 10),
-              Wrap(
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      const String comming = 'I am attending';
-                      viewmodel.changeAnswer(id, widget.userId, comming);
-                    },
-                    child: const Text(
-                      'Tilmeld',
-                      style: TextStyle(color: Colors.white),
+            padding: const EdgeInsets.all(20),
+            child: FutureBuilder(
+              future: tryToReload(),
+              builder: (context, snapshot) {
+                return Row(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          widget.headline,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          widget.date,
+                          style: const TextStyle(),
+                          textAlign: TextAlign.left,
+                        ),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          children: <Widget>[
+                            ElevatedButton(
+                              onPressed: () {
+                                const String comming = 'I am attending';
+                                viewmodel.changeAnswer(
+                                    id, widget.userId, comming);
+                              },
+                              child: const Text(
+                                'Tilmeld',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.green),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            ElevatedButton(
+                              onPressed: () {
+                                const String iamnotcooming =
+                                    'I am not attending';
+                                viewmodel.changeAnswer(
+                                    id, widget.userId, iamnotcooming);
+                              },
+                              child: const Text(
+                                'Frameld',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.red),
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            ElevatedButton(
+                              onPressed: () {
+                                const String idontknow = 'I have not answered';
+                                viewmodel.changeAnswer(
+                                    id, widget.userId, idontknow);
+                              },
+                              child: const Text(
+                                'Ved ikke',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.grey),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
                     ),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  ElevatedButton(
-                    onPressed: () {
-                      const String iamnotcooming = 'I am not attending';
-                      viewmodel.changeAnswer(id, widget.userId, iamnotcooming);
-                    },
-                    child: const Text(
-                      'Frameld',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  ElevatedButton(
-                    onPressed: () {
-                      const String idontknow = 'I have not answered';
-                      viewmodel.changeAnswer(id, widget.userId, idontknow);
-                    },
-                    child: const Text(
-                      'Ved ikke',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.grey),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                    Container(
+                        child: Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                child: ListView.builder(
+                    itemCount: personId.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                          children: <Widget>[
+                            const SizedBox(height: 20),
 
-        ],
-      ),
-    ));
+                            Text(name[index].Name,
+                                textAlign: TextAlign.left
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              status[index],
+                              textAlign: TextAlign.left,
+                            )
+
+
+                          ]
+
+                      );
+                    })
+                )
+                            ))
+                  ],
+                );
+              },
+            )));
   }
 }
