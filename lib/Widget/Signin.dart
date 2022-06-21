@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/EncryptData.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -43,6 +44,7 @@ class _SignInState extends State<SignIn> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                key: new Key('email'),
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Email'),
                 onChanged: (value) {
@@ -57,6 +59,7 @@ class _SignInState extends State<SignIn> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                key: new Key('password'),
                   obscureText: true,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Kodeord'),
@@ -72,6 +75,7 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 10),
               SizedBox(
                 child: TextButton(
+                  key: new Key('button'),
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text(
                     'Log på',
@@ -81,7 +85,13 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      viewmodel.login(_email, _password)
+
+                      final encrypt = EncryptData();
+
+                      encrypt.encryptAES(_password);
+                      final encryptPassword = encrypt.encrypted!.base64;
+                      
+                      viewmodel.login(_email, encryptPassword)
                           .then((value) => {
                                 if (value != null)
                                   {
@@ -90,7 +100,7 @@ class _SignInState extends State<SignIn> {
                                       MaterialPageRoute(
                                           builder: (context) => ProfilePage(
                                               email: _email,
-                                              password: _password,
+                                              password: encryptPassword,
                                               Role: value.Role,
                                               Id: value.Id)),
                                     ),
@@ -113,3 +123,5 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
+
