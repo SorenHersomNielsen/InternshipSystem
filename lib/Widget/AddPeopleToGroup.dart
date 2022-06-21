@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
-import 'package:internship/Pages/AddPersonPage.dart';
 import 'package:internship/Viewmodel.dart';
-import 'package:internship/Pages/EditPersonPage.dart';
 import 'package:internship/Pages/GroupsPage.dart';
 
 class AddPeopleToGroup extends StatefulWidget {
-  AddPeopleToGroup({Key? key, required this.groupId, required this.role, required this.password, required this.email, required this.userId}) : super(key: key);
+  const AddPeopleToGroup({Key? key, required this.groupId, required this.role, required this.password, required this.email, required this.userId}) : super(key: key);
 
   final int groupId;
   final int userId;
@@ -189,8 +187,8 @@ class _AddPeopleToGroupState extends State<AddPeopleToGroup> {
                         ),
                         onPressed: () {
                           listofid.clear();
-                          final snackBar = SnackBar(
-                            content: Text('listen er slettet'),
+                          const snackBar = SnackBar(
+                            content:  Text('listen er slettet'),
                             backgroundColor: Colors.blue,
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);

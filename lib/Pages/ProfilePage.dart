@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => GroupsPage(
+                          builder: (context) => PersonsPage(
                               Id: widget.Id,
                               Role: widget.Role,
                               email: widget.email,

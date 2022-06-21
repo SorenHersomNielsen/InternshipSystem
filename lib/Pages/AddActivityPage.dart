@@ -6,7 +6,7 @@ import 'package:internship/Pages/ActivtiesPage.dart';
 import 'package:internship/Pages/GroupsPage.dart';
 
 class AddActivityPage extends StatefulWidget {
-  AddActivityPage(
+  const AddActivityPage(
       {Key? key,
       required this.role,
       required this.id,

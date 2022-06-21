@@ -3,7 +3,7 @@ import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/Person.dart';
 
 class EditPerson extends StatefulWidget {
-   EditPerson({Key? key, required this.id, required this.mail, required this.password}) : super(key: key);
+    EditPerson({Key? key, required this.id, required this.mail, required this.password}) : super(key: key);
 
   int id;
   String mail;

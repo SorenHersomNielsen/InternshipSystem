@@ -18,7 +18,6 @@ class NetworkMethod {
 
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
     if (response.statusCode == 200) {
-      print(response.body);
       return Person.fromJson(jsonDecode(response.body)[0]);
     } else {
       return null;
@@ -172,7 +171,6 @@ class NetworkMethod {
   }
 
   Future<ActivityStatus> getactivity (int activityId, int personid) async{
-    print('http://localhost:5000/api/ActivityStatuses/StatusActivityWithThatActivityAndPerson?activityId=$activityId&personId=$personid');
     final response = await http.get(Uri.parse('http://localhost:5000/api/ActivityStatuses/StatusActivityWithThatActivityAndPerson?activityId=$activityId&personId=$personid'));
 
     if(response.statusCode == 200 ){
@@ -244,14 +242,12 @@ Future <List<ActivityAndGroupsOfPeople>> PostActivityAndGroupsOfPeople(int activ
     if(response.statusCode == 201) {
       List jsonresponse = jsonDecode(response.body);
       return jsonresponse.map((activityAndGroupsOfPeople) => ActivityAndGroupsOfPeople.fromJson(activityAndGroupsOfPeople)).toList();
-      print(response.body);
     } else{
       throw Exception('PostActivityAndGroupsOfPeople');
     }
 }
 
 Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId) async {
-    print('http://localhost:5000/api/ActivityStatuses/Activities?activityId=$activityId');
     final response = await http.get(Uri.parse('http://localhost:5000/api/ActivityStatuses/Activities?activityId=$activityId'));
 
     if(response.statusCode == 200){
@@ -263,7 +259,6 @@ Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId) async {
 }
 
 Future<Status> getStatusById(int id) async{
-    print('http://localhost:5000/api/Statuses/$id');
     final response = await http.get(Uri.parse('http://localhost:5000/api/Statuses/$id'));
 
     if(response.statusCode == 200){
@@ -274,7 +269,6 @@ Future<Status> getStatusById(int id) async{
 }
 
 Future<Person> getPersonById(int id) async {
-    print('http://localhost:5000/api/Persons/$id');
     final response = await http.get(Uri.parse('http://localhost:5000/api/Persons/$id'));
 
     if(response.statusCode == 200) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/Group.dart';
-import 'package:internship/Pages/AddPeopleToGroupPage.dart';
 import 'package:internship/Pages/ActivtiesPage.dart';
 
 class addGroupToActivity extends StatefulWidget {

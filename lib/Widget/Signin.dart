@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                key: new Key('email'),
+                key: const Key('email'),
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Email'),
                 onChanged: (value) {
@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
               ),
               const SizedBox(height: 20),
               TextFormField(
-                key: new Key('password'),
+                key: const Key('password'),
                   obscureText: true,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Kodeord'),
@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
               const SizedBox(height: 10),
               SizedBox(
                 child: TextButton(
-                  key: new Key('button'),
+                  key: const Key('button'),
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
                   child: const Text(
                     'Log på',
@@ -109,8 +109,7 @@ class _SignInState extends State<SignIn> {
                                         .showSnackBar(snackballfall)
                                   }
                               });
-                    }
-                    ;
+                    };
                   },
                 ),
               )

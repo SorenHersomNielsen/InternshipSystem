@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/ActivityStatus.dart';
 import 'package:internship/Model/Person.dart';
-import 'package:internship/Model/ActivityStatus.dart';
 
 class SeeActivity extends StatefulWidget {
   const SeeActivity(
@@ -38,8 +37,7 @@ class _SeeActivityState extends State<SeeActivity> {
             personId.add(value.personId),
             status.add(value.myStatus),
           });
-    }
-    ;
+    };
   }
 
   getPersonById() async {
@@ -47,8 +45,7 @@ class _SeeActivityState extends State<SeeActivity> {
       await viewmodel.getPersonById(id).then((value) => {
             name.add(value),
           });
-    }
-    ;
+    };
   }
 
   tryToReload() async {
@@ -179,7 +176,7 @@ class _SeeActivityState extends State<SeeActivity> {
                     Container(
                         child: Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(20.0),
                 child: ListView.builder(
                     itemCount: personId.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -195,8 +192,6 @@ class _SeeActivityState extends State<SeeActivity> {
                               status[index],
                               textAlign: TextAlign.left,
                             )
-
-
                           ]
 
                       );

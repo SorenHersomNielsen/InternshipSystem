@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:internship/Widget/AddActivity.dart';
 import 'package:internship/Pages/PersonsPage.dart';
 import 'package:internship/Pages/ProfilePage.dart';
 import 'package:internship/Pages/ActivtiesPage.dart';
@@ -7,7 +6,7 @@ import 'package:internship/Pages/GroupsPage.dart';
 import 'package:internship/Widget/AddGroupToActivity.dart';
 
 class AddGroupToActivityPage extends StatefulWidget {
-  AddGroupToActivityPage(
+  const AddGroupToActivityPage(
       {Key? key,
         required this.role,
         required this.id,

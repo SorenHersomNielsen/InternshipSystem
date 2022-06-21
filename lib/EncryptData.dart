@@ -14,13 +14,9 @@ class EncryptData{
   }
 
   static decryptAES(dynamic plainText){
-    print(encrypted);
     final key = Key.fromUtf8('azfdgbntrdfhe!estgtqwra48/3hthj#');
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
     decrypted = encrypter.decrypt(encrypted!, iv: iv);
-    print(decrypted);
   }
-
-
 }

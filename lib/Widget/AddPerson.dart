@@ -177,8 +177,7 @@ class _AddPersonState extends State<AddPerson> {
                                           .showSnackBar(snackbarFail)
                                     }
                                 });
-                      }
-                      ;
+                      };
                     },
                   ),
                 ]))));

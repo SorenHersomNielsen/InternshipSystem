@@ -6,7 +6,7 @@ import 'package:internship/Viewmodel.dart';
 import 'package:internship/Pages/SeeActivityPage.dart';
 
 class Activtes extends StatefulWidget {
-  Activtes(
+  const Activtes(
       {Key? key,
       required this.role,
       required this.id,
