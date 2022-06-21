@@ -2,13 +2,13 @@ class Person {
   final int Id;
   final String Name;
   final String Mail;
-  final String Password;
+  String Password;
   final String TelephoneNumber;
   final String Internship;
   final String School;
   final String Role;
 
-  const Person(
+  Person(
       {required this.Id,
       required this.Name,
       required this.Mail,

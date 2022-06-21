@@ -8,15 +8,17 @@ import 'package:internship/Model/ActivityAndGroupsOfPeople.dart';
 import 'package:internship/Model/Status.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'package:internship/EncryptData.dart';
 
 
 class NetworkMethod {
 
   Future<Person?> fetchPerson(String email, String password) async {
     final response = await http.get(Uri.parse(
-        'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
+        'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
     if (response.statusCode == 200) {
+      print(response.body);
       return Person.fromJson(jsonDecode(response.body)[0]);
     } else {
       return null;
@@ -28,7 +30,11 @@ class NetworkMethod {
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
     if (response.statusCode == 200) {
-      return Person.fromJson(jsonDecode(response.body)[0]);
+      final person = Person.fromJson(jsonDecode(response.body)[0]);
+      EncryptData.decryptAES(person.Password);
+      final password = EncryptData.decrypted;
+      person.Password = password;
+      return person;
     } else {
       throw Exception('Failed to load person');
     }

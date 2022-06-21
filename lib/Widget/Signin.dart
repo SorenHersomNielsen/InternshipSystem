@@ -86,11 +86,9 @@ class _SignInState extends State<SignIn> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
 
-                      final encrypt = EncryptData();
+                      EncryptData.encryptAES(_password);
+                      final encryptPassword = EncryptData.encrypted!.base64;
 
-                      encrypt.encryptAES(_password);
-                      final encryptPassword = encrypt.encrypted!.base64;
-                      
                       viewmodel.login(_email, encryptPassword)
                           .then((value) => {
                                 if (value != null)
