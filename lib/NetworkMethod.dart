@@ -245,7 +245,7 @@ Future <List<ActivityAndGroupsOfPeople>> PostActivityAndGroupsOfPeople(int activ
     } else{
       throw Exception('PostActivityAndGroupsOfPeople');
     }
-}
+  }
 
 Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId) async {
     final response = await http.get(Uri.parse('http://localhost:5000/api/ActivityStatuses/Activities?activityId=$activityId'));
@@ -256,7 +256,7 @@ Future<List<ActivityStatus>> getActivityStatusByActivity(int activityId) async {
     } else{
       throw Exception('getActivityStatusByActivity');
     }
-}
+  }
 
 Future<Status> getStatusById(int id) async{
     final response = await http.get(Uri.parse('http://localhost:5000/api/Statuses/$id'));
@@ -266,7 +266,7 @@ Future<Status> getStatusById(int id) async{
     } else{
       throw Exception('getStatusById');
     }
-}
+  }
 
 Future<Person> getPersonById(int id) async {
     final response = await http.get(Uri.parse('http://localhost:5000/api/Persons/$id'));
@@ -276,7 +276,7 @@ Future<Person> getPersonById(int id) async {
     } else {
       throw Exception('getPersonById');
     }
-}
+  }
 
 Future<List<GroupOfPeople>> getByGroupId(int groupId) async {
     final response = await http.get(Uri.parse('http://localhost:5000/api/GroupsOfPeople/Groups?groupId=$groupId'));
@@ -287,7 +287,7 @@ Future<List<GroupOfPeople>> getByGroupId(int groupId) async {
     } else{
       throw Exception('fail');
     }
-}
+  }
 
 Future<ActivityStatus> postPersonToActivity(int activityId, int personId)async {
     final response = await http.post(Uri.parse('http://localhost:5000/api/ActivityStatuses?activityId=$activityId&personId=$personId'));
@@ -297,8 +297,5 @@ Future<ActivityStatus> postPersonToActivity(int activityId, int personId)async {
     } else{
       throw Exception('fail');
     }
-}
-
-
-
+  }
 }
