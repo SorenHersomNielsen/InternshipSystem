@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
 import 'package:internship/Model/Person.dart';
+import 'package:internship/EncryptData.dart';
 
 class EditPerson extends StatefulWidget {
     EditPerson({Key? key, required this.id, required this.mail, required this.password}) : super(key: key);
@@ -137,6 +138,8 @@ class _EditPersonState extends State<EditPerson> {
                         ),
                       ),
                       onPressed: () {
+                        EncryptData.encryptAESChangeOtherUserPassword(password);
+                        password = EncryptData.otherUserPassword!.base64;
                         viewmodel.changePerson(
                             snapshot.data!.Id, mail, name, password, telephoneNumber, internship,school, dropdownValue)
                             .then((value) => {

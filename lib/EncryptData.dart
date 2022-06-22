@@ -6,6 +6,7 @@ class EncryptData{
   static var decrypted;
   static Encrypted? NewUserPassword;
   static Encrypted? oldUserPassword;
+  static Encrypted? otherUserPassword;
 
   static encryptAES(dynamic plainText){
     final key = Key.fromUtf8("azfdgbntrdfhe!estgtqwra48/3hthj#");
@@ -26,14 +27,21 @@ class EncryptData{
     final key = Key.fromUtf8("azfdgbntrdfhe!estgtqwra48/3hthj#");
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
-    NewUserPassword =encrypter.encrypt(plainText, iv: iv);
+    NewUserPassword = encrypter.encrypt(plainText, iv: iv);
   }
 
   static encryptAESNewPassword(dynamic newPassword, dynamic oldPassword){
     final key = Key.fromUtf8("azfdgbntrdfhe!estgtqwra48/3hthj#");
     final iv = IV.fromLength(16);
     final encrypter = Encrypter(AES(key));
-    encrypted =encrypter.encrypt(newPassword, iv: iv);
+    encrypted = encrypter.encrypt(newPassword, iv: iv);
     oldUserPassword = encrypter.encrypt(oldPassword, iv: iv);
+  }
+
+  static encryptAESChangeOtherUserPassword(dynamic password){
+    final key = Key.fromUtf8("azfdgbntrdfhe!estgtqwra48/3hthj#");
+    final iv = IV.fromLength(16);
+    final encrypter = Encrypter(AES(key));
+    otherUserPassword = encrypter.encrypt(password, iv: iv);
   }
 }
