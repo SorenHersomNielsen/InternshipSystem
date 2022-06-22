@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Model/Person.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/EncryptData.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key, required this.password, required this.email})
@@ -135,6 +136,10 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       onPressed: () {
+                        EncryptData.encryptAESNewPassword(_newpassword, _oldpassword);
+                        _newpassword = EncryptData.encrypted!.base64;
+                        _oldpassword = EncryptData.oldUserPassword!.base64;
+
                         viewmodel.changePassword(
                                 snapshot.data!.Mail, _oldpassword, _newpassword)
                             .then((value) => {
