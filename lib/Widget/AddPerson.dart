@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship/Viewmodel.dart';
+import 'package:internship/EncryptData.dart';
 
 class AddPerson extends StatefulWidget {
   const AddPerson({Key? key}) : super(key: key);
@@ -156,7 +157,11 @@ class _AddPersonState extends State<AddPerson> {
                       ),
                     ),
                     onPressed: () {
+
                       if (_formKey.currentState!.validate()) {
+
+                        EncryptData.encryptAESNewUserPassword(_password);
+                        _password = EncryptData.NewUserPassword!.base64;
                         viewmodel.createPerson(
                                 _name,
                                 _mail,
