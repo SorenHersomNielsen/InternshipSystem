@@ -14,8 +14,12 @@ import 'package:internship/EncryptData.dart';
 class NetworkMethod {
 
   Future<Person?> fetchPerson(String email, String password) async {
-    final response = await http.get(Uri.parse(
+    if(password.contains('+')){
+      final String replace = '%2B';
+      password = password.replaceAll('+', replace);
+    }
 
+    final response = await http.get(Uri.parse(
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
     if (response.statusCode == 200) {
       return Person.fromJson(jsonDecode(response.body)[0]);
@@ -25,6 +29,12 @@ class NetworkMethod {
   }
 
   Future<Person> getPersonData(String email, String password) async {
+
+    if(password.contains('+')){
+      final String replace = '%2B';
+      password = password.replaceAll('+', replace);
+    }
+
     final response = await http.get(Uri.parse(
         'http://localhost:5000/api/Persons/OnePerson?mail=$email&passWord=$password'));
 
@@ -62,6 +72,16 @@ class NetworkMethod {
 
    Future<String> changePassword(
       String mail, String oldPassword, String newPassword) async {
+
+     if(oldPassword.contains('+')){
+       final String replace = '%2B';
+       oldPassword = oldPassword.replaceAll('+', replace);
+     }
+     if(newPassword.contains('+')){
+       final String replace = '%2B';
+       newPassword = newPassword.replaceAll('+', replace);
+     }
+
     final response = await http.put(Uri.parse(
         'http://localhost:5000/api/Persons/PutPath?email=$mail&oldPassWord=$oldPassword&newPassWord=$newPassword'));
 
