@@ -114,7 +114,7 @@ class _PersonsState extends State<Persons> {
                                           MaterialPageRoute(
                                               builder: (context) => EditPersonsPage(
                                                 Id: persons[index].Id,
-                                                Role: persons[index].Role,
+                                                Role: widget.role,
                                                 password: persons[index].Password,
                                                 email: persons[index].Mail
                                               )),
